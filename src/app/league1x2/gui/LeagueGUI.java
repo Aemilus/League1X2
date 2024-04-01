@@ -6,9 +6,9 @@ import app.league1x2.gui.frame.LeagueFrame;
 import javax.swing.*;
 
 public class LeagueGUI {
-    private final LeagueFrame frame = new LeagueFrame();
+    public final LeagueFrame frame = new LeagueFrame();
 
-    private void initStyle() {
+    private void setLookAndFeel() {
         try {
             UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
         } catch (Exception exception) {
@@ -17,7 +17,7 @@ public class LeagueGUI {
     }
 
     public void draw() {
-        initStyle();
+        setLookAndFeel();
         SwingUtilities.invokeLater(() -> frame.setVisible(true));
     }
 

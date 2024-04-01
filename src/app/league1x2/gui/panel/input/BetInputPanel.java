@@ -9,17 +9,13 @@ import java.util.ArrayList;
 public class BetInputPanel extends JPanel {
     private final BetNamePanel betNamePanel = new BetNamePanel();
     private final BetOddsPanel betOddsPanel = new BetOddsPanel();
-    private final BetAddPanel betAddPanel = new BetAddPanel();
+    public final AddBetPanel addBetPanel = new AddBetPanel();
 
     public BetInputPanel() {
-//        setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
-//        add(betNamePanel);
-//        add(betOddsPanel);
-//        add(betAddPanel);
         setLayout(new BorderLayout(5, 5));
         add(betNamePanel, BorderLayout.WEST);
         add(betOddsPanel, BorderLayout.CENTER);
-        add(betAddPanel, BorderLayout.EAST);
+        add(addBetPanel, BorderLayout.EAST);
     }
 
     public BetOdds getBetOdds() {

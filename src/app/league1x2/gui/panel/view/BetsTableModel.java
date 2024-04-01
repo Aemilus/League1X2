@@ -6,8 +6,8 @@ import javax.swing.table.AbstractTableModel;
 import java.util.ArrayList;
 
 public class BetsTableModel extends AbstractTableModel {
-    private String[] columnNames = {"Meci", "1", "X", "2"};
-    private ArrayList<BetOdds> data = new ArrayList<>();
+    private final String[] columnNames = {"Meci", "1", "X", "2"};
+    public final ArrayList<BetOdds> data = new ArrayList<>();
 
     @Override
     public int getRowCount() {
@@ -30,15 +30,12 @@ public class BetsTableModel extends AbstractTableModel {
         if (columnIndex == 0) {
             return betOdds.getName();
         }
-        if (columnIndex == 1) {
-            return betOdds.getOdd1();
+        else {
+            return betOdds.getOdds().get(columnIndex - 1);
         }
-        if (columnIndex == 2) {
-            return betOdds.getOddX();
-        }
-        if (columnIndex == 3) {
-            return betOdds.getOdd2();
-        }
-        return null;
+    }
+
+    public void addRow(BetOdds betOdds) {
+        data.add(betOdds);
     }
 }

@@ -1,32 +1,28 @@
 package app.league1x2.core;
 
-public class BetOdds {
+import java.util.ArrayList;
+
+public class BetOdds implements ValidBet {
     private final String name;
-    private final Double odd1;
-    private final Double oddX;
-    private final Double odd2;
+    private final ArrayList<Double> odds = new ArrayList<>();
 
     public BetOdds(String name, Double odd1, Double oddX, Double odd2) {
         this.name = name;
-        this.odd1 = odd1;
-        this.oddX = oddX;
-        this.odd2 = odd2;
+        this.odds.add(odd1);
+        this.odds.add(oddX);
+        this.odds.add(odd2);
     }
 
     public String getName() {
         return name;
     }
 
-    public Double getOdd1() {
-        return odd1;
+    public ArrayList<Double> getOdds() {
+        return odds;
     }
 
-    public Double getOddX() {
-        return oddX;
+    @Override
+    public boolean isValid() {
+        return !this.name.isEmpty();
     }
-
-    public Double getOdd2() {
-        return odd2;
-    }
-
 }
