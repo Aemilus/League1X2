@@ -5,8 +5,10 @@ import java.awt.*;
 
 public class BetOddPanel extends JPanel {
     private JTextField betOddTextField;
+    private final String selection;
 
-    public BetOddPanel(int columns) {
+    public BetOddPanel(String selection, int columns) {
+        this.selection = selection;
         initBetOddTextField(columns);
         setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
         add(Box.createHorizontalStrut(5));
@@ -19,8 +21,11 @@ public class BetOddPanel extends JPanel {
         betOddTextField.setHorizontalAlignment(SwingConstants.CENTER);
     }
 
+    public String getSelection() {
+        return selection;
+    }
+
     public double getBetOdd() {
         return Double.parseDouble(betOddTextField.getText());
     }
-
 }

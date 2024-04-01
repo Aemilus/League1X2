@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class AddBetPanel extends JPanel {
-    public JButton addBetButton = new JButton("Adauga cote");
+    public JButton addBetButton = new JButton("Adauga cotele");
 
     public AddBetPanel() {
         initAddBetButton();

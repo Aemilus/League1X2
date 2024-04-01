@@ -8,7 +8,7 @@ import java.awt.*;
 import java.net.URL;
 
 public class LeagueFrame extends JFrame {
-    public final LeagueRootPanel rootPanel = new LeagueRootPanel();
+    public final LeagueRootPanel rootPanelNew = new LeagueRootPanel();
 
     public LeagueFrame() {
         super("League 1x2");
@@ -27,7 +27,7 @@ public class LeagueFrame extends JFrame {
 
     private void initFrame() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setPreferredSize(new Dimension(650, 350));
+        setPreferredSize(new Dimension(900, 400));
         setResizable(true);
         setLocationByPlatform(true);
         setLayout(new BorderLayout(5,5));
@@ -39,7 +39,7 @@ public class LeagueFrame extends JFrame {
         add(Box.createVerticalStrut(5), BorderLayout.SOUTH);
         add(Box.createHorizontalStrut(5), BorderLayout.EAST);
         add(Box.createHorizontalStrut(5), BorderLayout.WEST);
-        add(rootPanel, BorderLayout.CENTER);
+        add(rootPanelNew, BorderLayout.CENTER);
     }
 
 }

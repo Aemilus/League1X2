@@ -20,17 +20,18 @@ public class LeagueApp {
     }
 
     private void configAddBetButton() {
-        gui.frame.rootPanel.betInputPanel.addBetPanel.addBetButton.addActionListener(event -> {
-            BetOdds betOdds = gui.frame.rootPanel.betInputPanel.getBetOdds();
-            gui.frame.rootPanel.betsViewPanel.betsTablePanel.betsTableModel.addRow(betOdds);
-            gui.frame.rootPanel.betsViewPanel.betsTablePanel.betsTableModel.fireTableDataChanged();
+        gui.frame.rootPanelNew.betRootPanel.betInputPanel.addBetPanel.addBetButton.addActionListener(event -> {
+            BetOdds betOdds = gui.frame.rootPanelNew.betRootPanel.betInputPanel.getBetOdds();
+            gui.frame.rootPanelNew.betRootPanel.betInputPanel.betNamePanel.setNextBetName();
+            gui.frame.rootPanelNew.betRootPanel.betsViewPanel.betsTablePanel.betsTableModel.addRow(betOdds);
+            gui.frame.rootPanelNew.betRootPanel.betsViewPanel.betsTablePanel.betsTableModel.fireTableDataChanged();
         });
     }
 
     private void configGenerateTicketsButton() {
-        gui.frame.rootPanel.betsControlPanel.generateTicketsButton.addActionListener(event -> {
+        gui.frame.rootPanelNew.betRootPanel.betsControlPanel.generateTicketsButton.addActionListener(event -> {
             BetTickets tickets = core.generateTickets(
-                    gui.frame.rootPanel.betsViewPanel.betsTablePanel.betsTableModel, Integer.parseInt("10")
+                    gui.frame.rootPanelNew.betRootPanel.betsViewPanel.betsTablePanel.betsTableModel, Integer.parseInt("10")
             );
             tickets.print();
         });

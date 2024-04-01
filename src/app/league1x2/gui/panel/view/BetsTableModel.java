@@ -31,7 +31,7 @@ public class BetsTableModel extends AbstractTableModel {
             return betOdds.getName();
         }
         else {
-            return betOdds.getOdds().get(columnIndex - 1);
+            return betOdds.getOddsMap().get(getColumnName(columnIndex));
         }
     }
 

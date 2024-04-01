@@ -3,24 +3,26 @@ package app.league1x2.gui.panel.input;
 
 import javax.swing.*;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 public class BetOddsPanel extends JPanel {
+    public final static String[] selections = {"1", "X", "2"};
     private final List<BetOddPanel> betOddPanelsList = new ArrayList<>();
 
     public BetOddsPanel() {
         setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
-        for (int i = 0; i < 3; i++) {
-            BetOddPanel betOddPanel = new BetOddPanel(6);
+        for (String selection : selections) {
+            BetOddPanel betOddPanel = new BetOddPanel(selection, 6);
             add(betOddPanel);
             betOddPanelsList.add(betOddPanel);
         }
     }
 
-    public ArrayList<Double> getBetOdds() {
-        ArrayList<Double> betOddsList = new ArrayList<>();
+    public LinkedHashMap<String, Double> getBetOdds() {
+        LinkedHashMap<String, Double> betOddsList = new LinkedHashMap<>();
         for (BetOddPanel betOddPanel : betOddPanelsList) {
-            betOddsList.add(betOddPanel.getBetOdd());
+            betOddsList.put(betOddPanel.getSelection(), betOddPanel.getBetOdd());
         }
         return betOddsList;
     }

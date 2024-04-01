@@ -9,8 +9,8 @@ public class BetNamePanel extends JPanel {
     private final JTextField betNameTextField;
 
     public BetNamePanel() {
-        count++;
-        betNameTextField = new JTextField(STR."Meci \{count}", 20);
+        betNameTextField = new JTextField("", 20);
+        setNextBetName();
         betNameTextField.setMargin(new Insets(2, 4, 2, 4));
         setLayout(new BorderLayout(5, 5));
         add(betNameTextField, BorderLayout.WEST);
@@ -19,4 +19,10 @@ public class BetNamePanel extends JPanel {
     public String getBetName() {
         return betNameTextField.getText();
     }
+
+    public void setNextBetName() {
+        count++;
+        betNameTextField.setText(STR."Meci \{count}");
+    }
+
 }

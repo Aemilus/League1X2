@@ -4,10 +4,10 @@ import app.league1x2.core.BetOdds;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
+import java.util.LinkedHashMap;
 
 public class BetInputPanel extends JPanel {
-    private final BetNamePanel betNamePanel = new BetNamePanel();
+    public final BetNamePanel betNamePanel = new BetNamePanel();
     private final BetOddsPanel betOddsPanel = new BetOddsPanel();
     public final AddBetPanel addBetPanel = new AddBetPanel();
 
@@ -20,8 +20,13 @@ public class BetInputPanel extends JPanel {
 
     public BetOdds getBetOdds() {
         String betName = betNamePanel.getBetName();
-        ArrayList<Double> betOddsList = betOddsPanel.getBetOdds();
-        return new BetOdds(betName, betOddsList.get(0), betOddsList.get(1), betOddsList.get(2));
+        LinkedHashMap<String, Double> betOddsList = betOddsPanel.getBetOdds();
+        return new BetOdds(
+                betName,
+                betOddsList.get(BetOddsPanel.selections[0]),
+                betOddsList.get(BetOddsPanel.selections[1]),
+                betOddsList.get(BetOddsPanel.selections[2])
+        );
     }
 
 }
