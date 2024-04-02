@@ -26,6 +26,10 @@ public class BetOddPanel extends JPanel {
     }
 
     public double getBetOdd() {
-        return Double.parseDouble(betOddTextField.getText());
+        try {
+            return Double.parseDouble(betOddTextField.getText());
+        } catch (NumberFormatException e) {
+            return Double.parseDouble("0.0");
+        }
     }
 }

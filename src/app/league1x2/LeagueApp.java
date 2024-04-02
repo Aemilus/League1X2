@@ -32,6 +32,9 @@ public class LeagueApp {
 
     private void configGenerateTicketsButton() {
         gui.frame.rootPanelNew.betRootPanel.betsControlPanel.generateTicketsButton.addActionListener(event -> {
+            if (gui.frame.rootPanelNew.betRootPanel.betsViewPanel.betsTablePanel.betsTableModel.data.isEmpty()) {
+                return;
+            }
             BetTickets tickets = core.generateTickets(
                     gui.frame.rootPanelNew.betRootPanel.betsViewPanel.betsTablePanel.betsTableModel, Integer.parseInt("10")
             );
@@ -44,10 +47,16 @@ public class LeagueApp {
         gui.frame.rootPanelNew.ticketsRootPanel.ticketsNavigationPanel.forwardButton.addActionListener(event -> {
             if (BetTicketsDatabase.size() > 0) {
                 gui.frame.rootPanelNew.ticketsRootPanel.displayTicketPanel.ticketTablePanel.ticketTableModel.setData(BetTicketsDatabase.get());
-                BetTicketsDatabase.forwardCursor();
                 gui.frame.rootPanelNew.ticketsRootPanel.displayTicketPanel.ticketTablePanel.ticketTableModel.fireTableDataChanged();
+                updateCurrentTicketTextField();
+                BetTicketsDatabase.forwardCursor();
             }
         });
+    }
+
+    private void updateCurrentTicketTextField() {
+        String msg = STR."\{BetTicketsDatabase.getCursor()}/\{BetTicketsDatabase.size()}";
+        gui.frame.rootPanelNew.ticketsRootPanel.ticketsNavigationPanel.currentTicketTextField.setText(msg);
     }
 
     private void start() {
