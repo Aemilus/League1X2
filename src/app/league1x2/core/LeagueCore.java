@@ -1,5 +1,6 @@
 package app.league1x2.core;
 
+import app.league1x2.core.db.BetTicketsDatabase;
 import app.league1x2.gui.panel.view.BetsTableModel;
 import app.league1x2.utils.CartesianProduct;
 
@@ -8,9 +9,10 @@ import java.util.List;
 import java.util.Map;
 
 public class LeagueCore implements GenerateTickets {
+    private final BetTicketsDatabase betTicketsDatabase = new BetTicketsDatabase();
 
-    public void start() {
-        System.out.println("starting core..");
+    public BetTicketsDatabase getBetTicketsDatabase() {
+        return betTicketsDatabase;
     }
 
     private List<List<Bet>> extractBetsFromModel(BetsTableModel betsTableModel) {

@@ -1,5 +1,6 @@
 package app.league1x2.gui.panel.display;
 
+import app.league1x2.constants.LeagueAppConstants;
 import app.league1x2.core.Bet;
 import app.league1x2.core.BetTicket;
 
@@ -7,8 +8,12 @@ import javax.swing.table.AbstractTableModel;
 import java.util.ArrayList;
 
 public class TicketTableModel extends AbstractTableModel {
-    private final String[] columnNames = {"Meci", "Selectie", "Cota"};
-    private ArrayList<Bet> data = new ArrayList<>();
+    private final String[] columnNames = {
+            LeagueAppConstants.GAME,
+            LeagueAppConstants.SELECTION,
+            LeagueAppConstants.ODD,
+    };
+    private final ArrayList<Bet> data = new ArrayList<>();
 
     @Override
     public int getRowCount() {

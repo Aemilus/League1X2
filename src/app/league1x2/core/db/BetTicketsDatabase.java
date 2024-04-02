@@ -4,36 +4,36 @@ import app.league1x2.core.BetTicket;
 import app.league1x2.core.BetTickets;
 
 public class BetTicketsDatabase {
-    private static BetTickets betTickets = new BetTickets();
-    private static int cursor;
+    private BetTickets betTickets = new BetTickets();
+    private int cursor;
 
-    public static void setBetTickets(BetTickets betTickets) {
-        BetTicketsDatabase.betTickets = betTickets;
+    public void setBetTickets(BetTickets betTickets) {
+        this.betTickets = betTickets;
         cursor = 0;
     }
 
-    public static int size() {
+    public int size() {
         return betTickets.size();
     }
 
-    public static void setCursor(int cursor) {
-        BetTicketsDatabase.cursor = cursor;
+    public void setCursor(int cursor) {
+        this.cursor = cursor;
         backwardCursor();
     }
 
-    public static BetTicket get() {
+    public BetTicket get() {
         return betTickets.get(cursor);
     }
 
-    public static int getCursor() {
+    public int getCursor() {
         return cursor + 1;
     }
 
-    public static void forwardCursor() {
+    public void forwardCursor() {
         cursor = getCursor() % betTickets.size();
     }
 
-    public static void backwardCursor() {
+    public void backwardCursor() {
         if (cursor == 0) {
             cursor = size();
             backwardCursor();

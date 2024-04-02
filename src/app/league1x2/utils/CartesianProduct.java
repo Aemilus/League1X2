@@ -3,6 +3,7 @@ package app.league1x2.utils;
 import java.util.ArrayList;
 import java.util.List;
 
+@SuppressWarnings("Convert2Diamond")
 public class CartesianProduct<E> {
 
     public List<List<E>> getCartesianProduct(List<List<E>> sets) {

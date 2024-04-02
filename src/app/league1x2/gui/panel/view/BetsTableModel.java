@@ -1,12 +1,18 @@
 package app.league1x2.gui.panel.view;
 
+import app.league1x2.constants.LeagueAppConstants;
 import app.league1x2.core.BetOdds;
 
 import javax.swing.table.AbstractTableModel;
 import java.util.ArrayList;
 
 public class BetsTableModel extends AbstractTableModel {
-    private final String[] columnNames = {"Meci", "1", "X", "2"};
+    private final String[] columnNames = {
+            LeagueAppConstants.GAME,
+            LeagueAppConstants.SELECTION_1,
+            LeagueAppConstants.SELECTION_X,
+            LeagueAppConstants.SELECTION_2,
+    };
     public final ArrayList<BetOdds> data = new ArrayList<>();
 
     @Override

@@ -3,6 +3,7 @@ package app.league1x2.gui.panel.display.filter;
 import javax.swing.*;
 import java.awt.*;
 
+@SuppressWarnings("FieldCanBeLocal")
 public class FilterTicketsInputPanel extends JPanel {
     public final JTextField minTicketOddsTotal = new JTextField("1.00", 10);
     private final JLabel separator = new JLabel("-");

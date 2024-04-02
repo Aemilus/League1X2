@@ -3,6 +3,7 @@ package app.league1x2.gui.panel.view;
 import javax.swing.*;
 import java.awt.*;
 
+@SuppressWarnings("FieldCanBeLocal")
 public class BetsTablePanel extends JPanel {
     public final BetsTableModel betsTableModel = new BetsTableModel();
     private final JTable betsTable = new JTable(betsTableModel);
