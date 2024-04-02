@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class TicketTablePanel extends JPanel {
-    public final TicketTableModel ticketTableModel = new TicketTableModel(null);
+    public final TicketTableModel ticketTableModel = new TicketTableModel();
     private final JTable betsTable = new JTable(ticketTableModel);
     private final TicketTableScrollPane ticketTableScrollPane = new TicketTableScrollPane(betsTable);
 

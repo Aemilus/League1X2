@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class BetTicket {
     private final String name;
-    public final ArrayList<Bet> bets = new ArrayList<>();
+    private final ArrayList<Bet> bets = new ArrayList<>();
     private final Integer stake;
     private Double gain = Double.parseDouble("1.00");
 
@@ -12,6 +12,10 @@ public class BetTicket {
         this.name = name;
         this.stake = stake;
         this.gain = this.gain * this.stake;
+    }
+
+    public ArrayList<Bet> getBets() {
+        return bets;
     }
 
     public void addBet(Bet bet) {

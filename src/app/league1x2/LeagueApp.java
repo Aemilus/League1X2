@@ -4,6 +4,7 @@ package app.league1x2;
 import app.league1x2.core.BetOdds;
 import app.league1x2.core.BetTickets;
 import app.league1x2.core.LeagueCore;
+import app.league1x2.core.db.BetTicketsDatabase;
 import app.league1x2.gui.LeagueGUI;
 
 public class LeagueApp {
@@ -17,6 +18,7 @@ public class LeagueApp {
     private void configGUI() {
         configAddBetButton();
         configGenerateTicketsButton();
+        configForwardButton();
     }
 
     private void configAddBetButton() {
@@ -34,6 +36,17 @@ public class LeagueApp {
                     gui.frame.rootPanelNew.betRootPanel.betsViewPanel.betsTablePanel.betsTableModel, Integer.parseInt("10")
             );
             tickets.print();
+            BetTicketsDatabase.setBetTickets(tickets);
+        });
+    }
+
+    private void configForwardButton() {
+        gui.frame.rootPanelNew.ticketsRootPanel.ticketsNavigationPanel.forwardButton.addActionListener(event -> {
+            if (BetTicketsDatabase.size() > 0) {
+                gui.frame.rootPanelNew.ticketsRootPanel.displayTicketPanel.ticketTablePanel.ticketTableModel.setData(BetTicketsDatabase.get());
+                BetTicketsDatabase.forwardCursor();
+                gui.frame.rootPanelNew.ticketsRootPanel.displayTicketPanel.ticketTablePanel.ticketTableModel.fireTableDataChanged();
+            }
         });
     }
 

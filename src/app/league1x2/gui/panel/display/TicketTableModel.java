@@ -8,13 +8,7 @@ import java.util.ArrayList;
 
 public class TicketTableModel extends AbstractTableModel {
     private final String[] columnNames = {"Meci", "Selectie", "Cota"};
-    public final ArrayList<Bet> data = new ArrayList<>();
-
-    public TicketTableModel(BetTicket betTicket) {
-        if (betTicket != null) {
-            data.addAll(betTicket.bets);
-        }
-    }
+    private ArrayList<Bet> data = new ArrayList<>();
 
     @Override
     public int getRowCount() {
@@ -31,6 +25,8 @@ public class TicketTableModel extends AbstractTableModel {
         Bet bet = data.get(rowIndex);
         if (columnIndex == 0) {
             return bet.getName();
+        } else if (columnIndex == 1) {
+            return bet.getSelection();
         } else {
             return bet.getOdd();
         }
@@ -40,4 +36,12 @@ public class TicketTableModel extends AbstractTableModel {
     public String getColumnName(int column) {
         return columnNames[column];
     }
+
+    public void setData(BetTicket betTicket) {
+        data.clear();
+        if (betTicket != null) {
+            data.addAll(betTicket.getBets());
+        }
+    }
+
 }
