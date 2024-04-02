@@ -14,7 +14,7 @@ public class BetsControlPanel extends JPanel {
 
     private void initGenerateTicketsButton() {
         generateTicketsButton.setFocusPainted(false);
-        generateTicketsButton.setContentAreaFilled(false);
+//        generateTicketsButton.setContentAreaFilled(false);
     }
 
 }

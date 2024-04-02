@@ -20,7 +20,6 @@ public class TicketsNavigationPanel extends JPanel {
 
     private void initBackwardButton() {
         backwardButton.setFocusPainted(false);
-        backwardButton.setContentAreaFilled(false);
     }
 
     private void initCurrentTicketTextField() {
@@ -30,7 +29,6 @@ public class TicketsNavigationPanel extends JPanel {
 
     private void initForwardButton() {
         forwardButton.setFocusPainted(false);
-        forwardButton.setContentAreaFilled(false);
     }
 
 }

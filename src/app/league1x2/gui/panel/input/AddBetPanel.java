@@ -14,6 +14,6 @@ public class AddBetPanel extends JPanel {
 
     private void initAddBetButton() {
         addBetButton.setFocusPainted(false);
-        addBetButton.setContentAreaFilled(false);
+//        addBetButton.setContentAreaFilled(false);
     }
 }

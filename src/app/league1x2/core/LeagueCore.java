@@ -34,7 +34,7 @@ public class LeagueCore implements GenerateTickets {
         BetTickets betTickets = new BetTickets();
         for (List<Bet> betList : cpBet) {
             betTicketsCount++;
-            BetTicket betTicket = new BetTicket(STR."Bilet \{betTicketsCount}", stake);
+            BetTicket betTicket = new BetTicket(STR."Bilet \{betTicketsCount}");
             for (Bet bet : betList) {
                 betTicket.addBet(bet);
             }

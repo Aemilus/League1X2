@@ -19,6 +19,7 @@ public class LeagueApp {
         configAddBetButton();
         configGenerateTicketsButton();
         configForwardButton();
+        configBackwardButton();
     }
 
     private void configAddBetButton() {
@@ -40,22 +41,43 @@ public class LeagueApp {
             );
             tickets.print();
             BetTicketsDatabase.setBetTickets(tickets);
+            refreshDisplayTicketsPanel();
         });
+    }
+
+    private void refreshDisplayTicketsPanel() {
+        if (BetTicketsDatabase.size() > 0) {
+            BetTicketsDatabase.setCursor(1);
+            gui.frame.rootPanelNew.ticketsRootPanel.displayTicketPanel.ticketTablePanel.ticketTableModel.setData(BetTicketsDatabase.get());
+            gui.frame.rootPanelNew.ticketsRootPanel.displayTicketPanel.ticketTablePanel.ticketTableModel.fireTableDataChanged();
+            updateCurrentTicketTextField();
+        }
     }
 
     private void configForwardButton() {
         gui.frame.rootPanelNew.ticketsRootPanel.ticketsNavigationPanel.forwardButton.addActionListener(event -> {
             if (BetTicketsDatabase.size() > 0) {
+                BetTicketsDatabase.forwardCursor();
                 gui.frame.rootPanelNew.ticketsRootPanel.displayTicketPanel.ticketTablePanel.ticketTableModel.setData(BetTicketsDatabase.get());
                 gui.frame.rootPanelNew.ticketsRootPanel.displayTicketPanel.ticketTablePanel.ticketTableModel.fireTableDataChanged();
                 updateCurrentTicketTextField();
-                BetTicketsDatabase.forwardCursor();
+            }
+        });
+    }
+
+    private void configBackwardButton() {
+        gui.frame.rootPanelNew.ticketsRootPanel.ticketsNavigationPanel.backwardButton.addActionListener(event -> {
+            if (BetTicketsDatabase.size() > 0) {
+                BetTicketsDatabase.backwardCursor();
+                gui.frame.rootPanelNew.ticketsRootPanel.displayTicketPanel.ticketTablePanel.ticketTableModel.setData(BetTicketsDatabase.get());
+                gui.frame.rootPanelNew.ticketsRootPanel.displayTicketPanel.ticketTablePanel.ticketTableModel.fireTableDataChanged();
+                updateCurrentTicketTextField();
             }
         });
     }
 
     private void updateCurrentTicketTextField() {
-        String msg = STR."\{BetTicketsDatabase.getCursor()}/\{BetTicketsDatabase.size()}";
+        String msg = STR."\{BetTicketsDatabase.getCursor()} / \{BetTicketsDatabase.size()}";
         gui.frame.rootPanelNew.ticketsRootPanel.ticketsNavigationPanel.currentTicketTextField.setText(msg);
     }
 
