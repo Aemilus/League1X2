@@ -21,7 +21,6 @@ public class LeagueCore {
         for (BetOdds betOdds : betsTableModel.data) {
             ArrayList<Bet> gameBets = new ArrayList<>();
             for (Map.Entry<String, Double> betOdd : betOdds.oddsMap.entrySet()) {
-                System.out.println(betOdd);
                 if (Double.compare(betOdd.getValue(), LeagueAppConstants.VALID_ODDS) > 0) {
                     Bet bet = new Bet(betOdds.name, betOdd.getKey(), betOdd.getValue());
                     gameBets.add(bet);

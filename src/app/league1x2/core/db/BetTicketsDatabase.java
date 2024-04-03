@@ -6,8 +6,8 @@ import app.league1x2.core.tickets.BetTickets;
 public class BetTicketsDatabase {
     private BetTickets betTickets = new BetTickets();
     private int cursor;
-    private BetTicket minTicket;
-    private BetTicket maxTicket;
+    public BetTicket minTicket;
+    public BetTicket maxTicket;
 
     public void setBetTickets(BetTickets betTickets) {
         this.betTickets = betTickets;
@@ -27,14 +27,6 @@ public class BetTicketsDatabase {
             if (currentTicket.getOddsTotal() < minTicket.getOddsTotal()) minTicket = currentTicket;
             if (currentTicket.getOddsTotal() > maxTicket.getOddsTotal()) maxTicket = currentTicket;
         }
-    }
-
-    public BetTicket getMinTicket() {
-        return minTicket;
-    }
-
-    public BetTicket getMaxTicket() {
-        return maxTicket;
     }
 
     public int size() {

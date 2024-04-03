@@ -4,16 +4,15 @@ import javax.swing.*;
 import java.awt.*;
 
 public class BetsControlPanel extends JPanel {
+    public final JButton deleteBetOddsButton = new JButton("Sterge");
     public final JButton generateTicketsButton = new JButton("Genereaza");
 
     public BetsControlPanel() {
-        initGenerateTicketsButton();
         setLayout(new BorderLayout(5, 5));
-        add(generateTicketsButton, BorderLayout.EAST);
-    }
-
-    private void initGenerateTicketsButton() {
+        deleteBetOddsButton.setFocusPainted(false);
         generateTicketsButton.setFocusPainted(false);
+        add(deleteBetOddsButton, BorderLayout.WEST);
+        add(generateTicketsButton, BorderLayout.EAST);
     }
 
 }

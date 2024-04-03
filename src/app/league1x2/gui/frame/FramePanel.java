@@ -7,7 +7,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class FramePanel extends JPanel {
-    public BettingRootPanel bettingRootPanel = new BettingRootPanel();
+    public final BettingRootPanel bettingRootPanel = new BettingRootPanel();
     public final TicketsRootPanel ticketsRootPanel = new TicketsRootPanel();
 
     public FramePanel() {

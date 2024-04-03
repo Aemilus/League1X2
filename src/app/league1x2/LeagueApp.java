@@ -7,16 +7,13 @@ import app.league1x2.core.LeagueCore;
 import app.league1x2.gui.LeagueGUI;
 
 @SuppressWarnings("unused")
-public class LeagueApp {
+public final class LeagueApp {
     private final LeagueCore core = new LeagueCore();
     private final LeagueGUI gui = new LeagueGUI();
 
-    public LeagueApp() {
-        configGUI();
-    }
-
-    private void configGUI() {
+    private LeagueApp() {
         configAddBetButton();
+        configDeleteBetOddsButton();
         configGenerateTicketsButton();
         configForwardButton();
         configBackwardButton();
@@ -24,20 +21,26 @@ public class LeagueApp {
     }
 
     private void configAddBetButton() {
-        gui.frame.framePanel.bettingRootPanel.betInputPanel.addBetPanel.addBetButton.addActionListener(event -> {
-            BetOdds betOdds = gui.frame.framePanel.bettingRootPanel.betInputPanel.getBetOdds();
-            gui.frame.framePanel.bettingRootPanel.betInputPanel.betNamePanel.setNextBetName();
-            gui.frame.framePanel.bettingRootPanel.betsViewPanel.betsTablePanel.betsTableModel.addRow(betOdds);
-            gui.frame.framePanel.bettingRootPanel.betsViewPanel.betsTablePanel.betsTableModel.fireTableDataChanged();
+        gui.getBetInputPanel().addBetPanel.addBetButton.addActionListener(event -> {
+            BetOdds betOdds = gui.getBetInputPanel().getBetOdds();
+            gui.getBetInputPanel().betNamePanel.setNextBetName();
+            gui.getBetsTablePanel().betsTableModel.addRow(betOdds);
+            gui.getBetsTablePanel().betsTableModel.fireTableDataChanged();
+        });
+    }
+
+    private void configDeleteBetOddsButton() {
+        gui.getBetsControlPanel().deleteBetOddsButton.addActionListener(event -> {
+
         });
     }
 
     private void configGenerateTicketsButton() {
-        gui.frame.framePanel.bettingRootPanel.betsControlPanel.generateTicketsButton.addActionListener(event -> {
-            if (gui.frame.framePanel.bettingRootPanel.betsViewPanel.betsTablePanel.betsTableModel.data.isEmpty()) {
+        gui.getBetsControlPanel().generateTicketsButton.addActionListener(event -> {
+            if (gui.getBetsTablePanel().betsTableModel.data.isEmpty()) {
                 return;
             }
-            BetTickets tickets = core.generateTickets(gui.frame.framePanel.bettingRootPanel.betsViewPanel.betsTablePanel.betsTableModel);
+            BetTickets tickets = core.generateTickets(gui.getBetsTablePanel().betsTableModel);
             core.betTicketsDatabase.setBetTickets(tickets);
             refreshDisplayTicketsPanel();
         });
@@ -46,30 +49,30 @@ public class LeagueApp {
     private void refreshDisplayTicketsPanel() {
         if (core.betTicketsDatabase.size() > 0) {
             core.betTicketsDatabase.setCursor(1);
-            gui.frame.framePanel.ticketsRootPanel.ticketTablePanel.ticketTableModel.setData(core.betTicketsDatabase.get());
-            gui.frame.framePanel.ticketsRootPanel.ticketTablePanel.ticketTableModel.fireTableDataChanged();
+            gui.getTicketTablePanel().ticketTableModel.setData(core.betTicketsDatabase.get());
+            gui.getTicketTablePanel().ticketTableModel.fireTableDataChanged();
             updateCurrentTicketTextField();
             updateFilterTicketsInputPanel();
         }
     }
 
     private void configForwardButton() {
-        gui.frame.framePanel.ticketsRootPanel.ticketsNavigationPanel.forwardButton.addActionListener(event -> {
+        gui.getTicketsNavigationPanel().forwardButton.addActionListener(event -> {
             if (core.betTicketsDatabase.size() > 0) {
                 core.betTicketsDatabase.forwardCursor();
-                gui.frame.framePanel.ticketsRootPanel.ticketTablePanel.ticketTableModel.setData(core.betTicketsDatabase.get());
-                gui.frame.framePanel.ticketsRootPanel.ticketTablePanel.ticketTableModel.fireTableDataChanged();
+                gui.getTicketTablePanel().ticketTableModel.setData(core.betTicketsDatabase.get());
+                gui.getTicketTablePanel().ticketTableModel.fireTableDataChanged();
                 updateCurrentTicketTextField();
             }
         });
     }
 
     private void configBackwardButton() {
-        gui.frame.framePanel.ticketsRootPanel.ticketsNavigationPanel.backwardButton.addActionListener(event -> {
+        gui.getTicketsNavigationPanel().backwardButton.addActionListener(event -> {
             if (core.betTicketsDatabase.size() > 0) {
                 core.betTicketsDatabase.backwardCursor();
-                gui.frame.framePanel.ticketsRootPanel.ticketTablePanel.ticketTableModel.setData(core.betTicketsDatabase.get());
-                gui.frame.framePanel.ticketsRootPanel.ticketTablePanel.ticketTableModel.fireTableDataChanged();
+                gui.getTicketTablePanel().ticketTableModel.setData(core.betTicketsDatabase.get());
+                gui.getTicketTablePanel().ticketTableModel.fireTableDataChanged();
                 updateCurrentTicketTextField();
             }
         });
@@ -81,12 +84,14 @@ public class LeagueApp {
 
     private void updateCurrentTicketTextField() {
         String msg = STR."\{core.betTicketsDatabase.getCursor()} / \{core.betTicketsDatabase.size()}";
-        gui.frame.framePanel.ticketsRootPanel.ticketsNavigationPanel.currentTicketTextField.setText(msg);
+        gui.getTicketsNavigationPanel().currentTicketTextField.setText(msg);
     }
 
     private void updateFilterTicketsInputPanel() {
-        gui.frame.framePanel.ticketsRootPanel.filterTicketsPanel.filterTicketsInputPanel.minTicketOddsTotal.setText(core.betTicketsDatabase.getMinTicket().getOddsTotalAsString());
-        gui.frame.framePanel.ticketsRootPanel.filterTicketsPanel.filterTicketsInputPanel.maxTicketOddsTotal.setText(core.betTicketsDatabase.getMaxTicket().getOddsTotalAsString());
+        gui.getFilterTicketsInputPanel().
+                minTicketOddsTotal.setText(core.betTicketsDatabase.minTicket.getOddsTotalAsString());
+        gui.getFilterTicketsInputPanel().
+                maxTicketOddsTotal.setText(core.betTicketsDatabase.maxTicket.getOddsTotalAsString());
     }
 
     private void start() {
