@@ -1,4 +1,4 @@
-package app.league1x2.gui.panel.view;
+package app.league1x2.gui.panels.betting.view;
 
 import javax.swing.*;
 import java.awt.*;

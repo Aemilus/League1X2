@@ -1,6 +1,5 @@
-package app.league1x2.gui.panel.input;
+package app.league1x2.gui.panels.betting.input;
 
-import app.league1x2.constants.LeagueAppConstants;
 import app.league1x2.core.BetOdds;
 
 import javax.swing.*;
@@ -22,12 +21,7 @@ public class BetInputPanel extends JPanel {
     public BetOdds getBetOdds() {
         String betName = betNamePanel.getBetName();
         LinkedHashMap<String, Double> betOddsMap = betOddsPanel.getBetOddsMap();
-        return new BetOdds(
-                betName,
-                betOddsMap.get(LeagueAppConstants.SELECTIONS[0]),
-                betOddsMap.get(LeagueAppConstants.SELECTIONS[1]),
-                betOddsMap.get(LeagueAppConstants.SELECTIONS[2])
-        );
+        return new BetOdds(betName, betOddsMap);
     }
 
 }

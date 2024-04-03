@@ -1,4 +1,4 @@
-package app.league1x2.gui.panel.display;
+package app.league1x2.gui.panels.tickets.table;
 
 import app.league1x2.constants.LeagueAppConstants;
 import app.league1x2.core.Bet;
@@ -11,7 +11,7 @@ public class TicketTableModel extends AbstractTableModel {
     private final String[] columnNames = {
             LeagueAppConstants.GAME,
             LeagueAppConstants.SELECTION,
-            LeagueAppConstants.ODD,
+            LeagueAppConstants.ODDS,
     };
     private final ArrayList<Bet> data = new ArrayList<>();
 

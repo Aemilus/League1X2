@@ -3,7 +3,7 @@ package app.league1x2.constants;
 public final class LeagueAppConstants {
     public final static String GAME = "Meci";
     public final static String SELECTION = "Selectie";
-    public final static String ODD = "Cota";
+    public final static String ODDS = "Cota";
     public final static String SELECTION_1 = "1";
     public final static String SELECTION_X = "X";
     public final static String SELECTION_2 = "2";

@@ -1,4 +1,4 @@
-package app.league1x2.gui.panel.display;
+package app.league1x2.gui.panels.tickets.table;
 
 import javax.swing.*;
 import java.awt.*;

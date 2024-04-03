@@ -1,5 +1,5 @@
 
-package app.league1x2.gui.panel.input;
+package app.league1x2.gui.panels.betting.input;
 
 import app.league1x2.constants.LeagueAppConstants;
 

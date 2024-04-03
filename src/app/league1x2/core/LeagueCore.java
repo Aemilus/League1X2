@@ -1,7 +1,7 @@
 package app.league1x2.core;
 
 import app.league1x2.core.db.BetTicketsDatabase;
-import app.league1x2.gui.panel.view.BetsTableModel;
+import app.league1x2.gui.panels.betting.view.BetsTableModel;
 import app.league1x2.utils.CartesianProduct;
 
 import java.util.ArrayList;
@@ -19,8 +19,8 @@ public class LeagueCore implements GenerateTickets {
         List<List<Bet>> bets = new ArrayList<>();
         for (BetOdds betOdds : betsTableModel.data) {
             ArrayList<Bet> gameBets = new ArrayList<>();
-            for (Map.Entry<String, Double> betOdd : betOdds.getOddsMap().entrySet()) {
-                Bet bet = new Bet(betOdds.getName(), betOdd.getKey(), betOdd.getValue());
+            for (Map.Entry<String, Double> betOdd : betOdds.oddsMap.entrySet()) {
+                Bet bet = new Bet(betOdds.name, betOdd.getKey(), betOdd.getValue());
                 gameBets.add(bet);
             }
             bets.add(gameBets);

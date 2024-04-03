@@ -1,4 +1,4 @@
-package app.league1x2.gui.panel.view;
+package app.league1x2.gui.panels.betting.view;
 
 import app.league1x2.constants.LeagueAppConstants;
 import app.league1x2.core.BetOdds;
@@ -34,10 +34,21 @@ public class BetsTableModel extends AbstractTableModel {
     public Object getValueAt(int rowIndex, int columnIndex) {
         BetOdds betOdds = data.get(rowIndex);
         if (columnIndex == 0) {
-            return betOdds.getName();
+            return betOdds.name;
         }
         else {
-            return betOdds.getOddsMap().get(getColumnName(columnIndex));
+            return betOdds.oddsMap.get(getColumnName(columnIndex));
+        }
+    }
+
+    @Override
+    public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
+        BetOdds betOdds = data.get(rowIndex);
+        if (columnIndex == 0) {
+            betOdds.name = (String) aValue;
+        } else {
+            Double value = Double.parseDouble((String) aValue);
+            betOdds.oddsMap.put(LeagueAppConstants.SELECTIONS[columnIndex - 1], value);
         }
     }
 

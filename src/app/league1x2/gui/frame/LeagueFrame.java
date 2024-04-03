@@ -1,19 +1,17 @@
 
 package app.league1x2.gui.frame;
 
-import app.league1x2.gui.panel.root.LeagueRootPanel;
-
 import javax.swing.*;
 import java.awt.*;
 import java.net.URL;
 
 public class LeagueFrame extends JFrame {
-    public final LeagueRootPanel rootPanelNew = new LeagueRootPanel();
+    public final FramePanel framePanel = new FramePanel();
 
     public LeagueFrame() {
         super("League 1x2");
         initFrame();
-        initRootPanel();
+        initFramePanel();
         pack();
     }
 
@@ -34,12 +32,12 @@ public class LeagueFrame extends JFrame {
         setIcon();
     }
 
-    private void initRootPanel() {
+    private void initFramePanel() {
         add(Box.createVerticalStrut(5), BorderLayout.NORTH);
         add(Box.createVerticalStrut(5), BorderLayout.SOUTH);
         add(Box.createHorizontalStrut(5), BorderLayout.EAST);
         add(Box.createHorizontalStrut(5), BorderLayout.WEST);
-        add(rootPanelNew, BorderLayout.CENTER);
+        add(framePanel, BorderLayout.CENTER);
     }
 
 }

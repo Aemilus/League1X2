@@ -1,19 +1,19 @@
 
-package app.league1x2.gui.panel.root;
+package app.league1x2.gui.panels.betting;
 
-import app.league1x2.gui.panel.control.BetsControlPanel;
-import app.league1x2.gui.panel.input.BetInputPanel;
-import app.league1x2.gui.panel.view.BetsViewPanel;
+import app.league1x2.gui.panels.betting.control.BetsControlPanel;
+import app.league1x2.gui.panels.betting.input.BetInputPanel;
+import app.league1x2.gui.panels.betting.view.BetsViewPanel;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class BetRootPanel extends JPanel {
+public class BettingRootPanel extends JPanel {
     public final BetInputPanel betInputPanel = new BetInputPanel();
     public final BetsViewPanel betsViewPanel = new BetsViewPanel();
     public final BetsControlPanel betsControlPanel = new BetsControlPanel();
 
-    public BetRootPanel() {
+    public BettingRootPanel() {
         setLayout(new BorderLayout(5, 5));
         add(betInputPanel, BorderLayout.NORTH);
         add(betsViewPanel, BorderLayout.CENTER);
