@@ -31,7 +31,12 @@ public final class LeagueApp {
 
     private void configDeleteBetOddsButton() {
         gui.getBetsControlPanel().deleteBetOddsButton.addActionListener(event -> {
-
+            int[] rowsIndex = gui.getBetsTablePanel().betsTable.getSelectedRows();
+            for(int i=rowsIndex.length - 1; i>=0; i--) {
+                int rowIndex = rowsIndex[i];
+                gui.getBetsTablePanel().betsTableModel.removeRow(rowIndex);
+            }
+            gui.getBetsTablePanel().betsTableModel.fireTableDataChanged();
         });
     }
 
@@ -41,6 +46,7 @@ public final class LeagueApp {
                 return;
             }
             BetTickets tickets = core.generateTickets(gui.getBetsTablePanel().betsTableModel);
+//            tickets.print();
             core.betTicketsDatabase.setBetTickets(tickets);
             refreshDisplayTicketsPanel();
         });
@@ -51,7 +57,7 @@ public final class LeagueApp {
             core.betTicketsDatabase.setCursor(1);
             gui.getTicketTablePanel().ticketTableModel.setData(core.betTicketsDatabase.get());
             gui.getTicketTablePanel().ticketTableModel.fireTableDataChanged();
-            updateCurrentTicketTextField();
+            updateCurrentTicketTextFields();
             updateFilterTicketsInputPanel();
         }
     }
@@ -62,7 +68,7 @@ public final class LeagueApp {
                 core.betTicketsDatabase.forwardCursor();
                 gui.getTicketTablePanel().ticketTableModel.setData(core.betTicketsDatabase.get());
                 gui.getTicketTablePanel().ticketTableModel.fireTableDataChanged();
-                updateCurrentTicketTextField();
+                updateCurrentTicketTextFields();
             }
         });
     }
@@ -73,7 +79,7 @@ public final class LeagueApp {
                 core.betTicketsDatabase.backwardCursor();
                 gui.getTicketTablePanel().ticketTableModel.setData(core.betTicketsDatabase.get());
                 gui.getTicketTablePanel().ticketTableModel.fireTableDataChanged();
-                updateCurrentTicketTextField();
+                updateCurrentTicketTextFields();
             }
         });
     }
@@ -82,9 +88,12 @@ public final class LeagueApp {
 
     }
 
-    private void updateCurrentTicketTextField() {
+    private void updateCurrentTicketTextFields() {
         String msg = STR."\{core.betTicketsDatabase.getCursor()} / \{core.betTicketsDatabase.size()}";
-        gui.getTicketsNavigationPanel().currentTicketTextField.setText(msg);
+        gui.getTicketsNavigationPanel().
+                currentTicketTextField.setText(msg);
+        gui.getTicketsNavigationPanel().
+                currentTicketTotalOddsTextField.setText(core.betTicketsDatabase.get().getOddsTotalAsString());
     }
 
     private void updateFilterTicketsInputPanel() {

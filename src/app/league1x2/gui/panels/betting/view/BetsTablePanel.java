@@ -6,7 +6,7 @@ import java.awt.*;
 @SuppressWarnings("FieldCanBeLocal")
 public class BetsTablePanel extends JPanel {
     public final BetsTableModel betsTableModel = new BetsTableModel();
-    private final JTable betsTable = new JTable(betsTableModel);
+    public final JTable betsTable = new JTable(betsTableModel);
     private final BetsTableScrollPane betsTableScrollPane = new BetsTableScrollPane(betsTable);
 
     public BetsTablePanel() {

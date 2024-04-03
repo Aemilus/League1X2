@@ -3,6 +3,7 @@ package app.league1x2.core.tickets;
 import app.league1x2.core.betting.Bet;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class BetTicket {
     private final String name;
@@ -22,7 +23,7 @@ public class BetTicket {
     }
 
     public String getOddsTotalAsString() {
-        return String.format("%.2f", getOddsTotal());
+        return String.format(Locale.US, "%.2f", getOddsTotal());
     }
 
     public void addBet(Bet bet) {

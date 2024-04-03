@@ -55,4 +55,10 @@ public class BetsTableModel extends AbstractTableModel {
     public void addRow(BetOdds betOdds) {
         data.add(betOdds);
     }
+
+    @SuppressWarnings("UnusedReturnValue")
+    public BetOdds removeRow(int rowIndex) {
+        return data.remove(rowIndex);
+    }
+
 }
