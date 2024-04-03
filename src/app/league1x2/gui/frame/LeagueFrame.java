@@ -25,7 +25,7 @@ public class LeagueFrame extends JFrame {
 
     private void initFrame() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setPreferredSize(new Dimension(900, 400));
+        setPreferredSize(new Dimension(950, 400));
         setResizable(true);
         setLocationByPlatform(true);
         setLayout(new BorderLayout(5,5));

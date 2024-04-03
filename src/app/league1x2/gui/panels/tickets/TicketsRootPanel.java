@@ -13,7 +13,7 @@ public class TicketsRootPanel extends JPanel {
     public final TicketsNavigationPanel ticketsNavigationPanel= new TicketsNavigationPanel();
 
     public TicketsRootPanel() {
-        setPreferredSize(new Dimension(350, 100));
+        setPreferredSize(new Dimension(400, 400));
         setLayout(new BorderLayout(5, 5));
         add(filterTicketsPanel, BorderLayout.NORTH);
         add(ticketTablePanel, BorderLayout.CENTER);

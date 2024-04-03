@@ -20,6 +20,7 @@ public class LeagueApp {
         configGenerateTicketsButton();
         configForwardButton();
         configBackwardButton();
+        configFilterTicketsButton();
     }
 
     private void configAddBetButton() {
@@ -72,6 +73,10 @@ public class LeagueApp {
                 updateCurrentTicketTextField();
             }
         });
+    }
+
+    private void configFilterTicketsButton() {
+
     }
 
     private void updateCurrentTicketTextField() {
