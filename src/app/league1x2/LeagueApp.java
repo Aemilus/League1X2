@@ -1,8 +1,8 @@
 
 package app.league1x2;
 
-import app.league1x2.core.BetOdds;
-import app.league1x2.core.BetTickets;
+import app.league1x2.core.betting.BetOdds;
+import app.league1x2.core.tickets.BetTickets;
 import app.league1x2.core.LeagueCore;
 import app.league1x2.gui.LeagueGUI;
 
@@ -36,18 +36,16 @@ public class LeagueApp {
             if (gui.frame.framePanel.bettingRootPanel.betsViewPanel.betsTablePanel.betsTableModel.data.isEmpty()) {
                 return;
             }
-            BetTickets tickets = core.generateTickets(
-                    gui.frame.framePanel.bettingRootPanel.betsViewPanel.betsTablePanel.betsTableModel, Integer.parseInt("10")
-            );
-            core.getBetTicketsDatabase().setBetTickets(tickets);
+            BetTickets tickets = core.generateTickets(gui.frame.framePanel.bettingRootPanel.betsViewPanel.betsTablePanel.betsTableModel);
+            core.betTicketsDatabase.setBetTickets(tickets);
             refreshDisplayTicketsPanel();
         });
     }
 
     private void refreshDisplayTicketsPanel() {
-        if (core.getBetTicketsDatabase().size() > 0) {
-            core.getBetTicketsDatabase().setCursor(1);
-            gui.frame.framePanel.ticketsRootPanel.ticketTablePanel.ticketTableModel.setData(core.getBetTicketsDatabase().get());
+        if (core.betTicketsDatabase.size() > 0) {
+            core.betTicketsDatabase.setCursor(1);
+            gui.frame.framePanel.ticketsRootPanel.ticketTablePanel.ticketTableModel.setData(core.betTicketsDatabase.get());
             gui.frame.framePanel.ticketsRootPanel.ticketTablePanel.ticketTableModel.fireTableDataChanged();
             updateCurrentTicketTextField();
             updateFilterTicketsInputPanel();
@@ -56,9 +54,9 @@ public class LeagueApp {
 
     private void configForwardButton() {
         gui.frame.framePanel.ticketsRootPanel.ticketsNavigationPanel.forwardButton.addActionListener(event -> {
-            if (core.getBetTicketsDatabase().size() > 0) {
-                core.getBetTicketsDatabase().forwardCursor();
-                gui.frame.framePanel.ticketsRootPanel.ticketTablePanel.ticketTableModel.setData(core.getBetTicketsDatabase().get());
+            if (core.betTicketsDatabase.size() > 0) {
+                core.betTicketsDatabase.forwardCursor();
+                gui.frame.framePanel.ticketsRootPanel.ticketTablePanel.ticketTableModel.setData(core.betTicketsDatabase.get());
                 gui.frame.framePanel.ticketsRootPanel.ticketTablePanel.ticketTableModel.fireTableDataChanged();
                 updateCurrentTicketTextField();
             }
@@ -67,9 +65,9 @@ public class LeagueApp {
 
     private void configBackwardButton() {
         gui.frame.framePanel.ticketsRootPanel.ticketsNavigationPanel.backwardButton.addActionListener(event -> {
-            if (core.getBetTicketsDatabase().size() > 0) {
-                core.getBetTicketsDatabase().backwardCursor();
-                gui.frame.framePanel.ticketsRootPanel.ticketTablePanel.ticketTableModel.setData(core.getBetTicketsDatabase().get());
+            if (core.betTicketsDatabase.size() > 0) {
+                core.betTicketsDatabase.backwardCursor();
+                gui.frame.framePanel.ticketsRootPanel.ticketTablePanel.ticketTableModel.setData(core.betTicketsDatabase.get());
                 gui.frame.framePanel.ticketsRootPanel.ticketTablePanel.ticketTableModel.fireTableDataChanged();
                 updateCurrentTicketTextField();
             }
@@ -77,13 +75,13 @@ public class LeagueApp {
     }
 
     private void updateCurrentTicketTextField() {
-        String msg = STR."\{core.getBetTicketsDatabase().getCursor()} / \{core.getBetTicketsDatabase().size()}";
+        String msg = STR."\{core.betTicketsDatabase.getCursor()} / \{core.betTicketsDatabase.size()}";
         gui.frame.framePanel.ticketsRootPanel.ticketsNavigationPanel.currentTicketTextField.setText(msg);
     }
 
     private void updateFilterTicketsInputPanel() {
-        gui.frame.framePanel.ticketsRootPanel.filterTicketsPanel.filterTicketsInputPanel.minTicketOddsTotal.setText(core.getBetTicketsDatabase().getMinTicket().getOddsTotalAsString());
-        gui.frame.framePanel.ticketsRootPanel.filterTicketsPanel.filterTicketsInputPanel.maxTicketOddsTotal.setText(core.getBetTicketsDatabase().getMaxTicket().getOddsTotalAsString());
+        gui.frame.framePanel.ticketsRootPanel.filterTicketsPanel.filterTicketsInputPanel.minTicketOddsTotal.setText(core.betTicketsDatabase.getMinTicket().getOddsTotalAsString());
+        gui.frame.framePanel.ticketsRootPanel.filterTicketsPanel.filterTicketsInputPanel.maxTicketOddsTotal.setText(core.betTicketsDatabase.getMaxTicket().getOddsTotalAsString());
     }
 
     private void start() {

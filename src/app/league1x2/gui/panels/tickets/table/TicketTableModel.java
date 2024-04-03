@@ -1,8 +1,8 @@
 package app.league1x2.gui.panels.tickets.table;
 
 import app.league1x2.constants.LeagueAppConstants;
-import app.league1x2.core.Bet;
-import app.league1x2.core.BetTicket;
+import app.league1x2.core.betting.Bet;
+import app.league1x2.core.tickets.BetTicket;
 
 import javax.swing.table.AbstractTableModel;
 import java.util.ArrayList;

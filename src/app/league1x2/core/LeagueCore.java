@@ -1,6 +1,10 @@
 package app.league1x2.core;
 
+import app.league1x2.core.betting.Bet;
+import app.league1x2.core.betting.BetOdds;
 import app.league1x2.core.db.BetTicketsDatabase;
+import app.league1x2.core.tickets.BetTicket;
+import app.league1x2.core.tickets.BetTickets;
 import app.league1x2.gui.panels.betting.view.BetsTableModel;
 import app.league1x2.utils.CartesianProduct;
 
@@ -8,12 +12,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class LeagueCore implements GenerateTickets {
-    private final BetTicketsDatabase betTicketsDatabase = new BetTicketsDatabase();
-
-    public BetTicketsDatabase getBetTicketsDatabase() {
-        return betTicketsDatabase;
-    }
+public class LeagueCore {
+    public final BetTicketsDatabase betTicketsDatabase = new BetTicketsDatabase();
 
     private List<List<Bet>> extractBetsFromModel(BetsTableModel betsTableModel) {
         List<List<Bet>> bets = new ArrayList<>();
@@ -28,8 +28,7 @@ public class LeagueCore implements GenerateTickets {
         return bets;
     }
 
-    @Override
-    public BetTickets generateTickets(BetsTableModel betsTableModel, Integer stake) {
+    public BetTickets generateTickets(BetsTableModel betsTableModel) {
         CartesianProduct<Bet> cp = new CartesianProduct<>();
         List<List<Bet>> cpBet = cp.getCartesianProduct(extractBetsFromModel(betsTableModel));
         int betTicketsCount = 0;

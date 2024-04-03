@@ -1,6 +1,6 @@
 package app.league1x2.gui.panels.betting.input;
 
-import app.league1x2.core.BetOdds;
+import app.league1x2.core.betting.BetOdds;
 
 import javax.swing.*;
 import java.awt.*;

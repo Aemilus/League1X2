@@ -1,7 +1,7 @@
 package app.league1x2.core.db;
 
-import app.league1x2.core.BetTicket;
-import app.league1x2.core.BetTickets;
+import app.league1x2.core.tickets.BetTicket;
+import app.league1x2.core.tickets.BetTickets;
 
 public class BetTicketsDatabase {
     private BetTickets betTickets = new BetTickets();

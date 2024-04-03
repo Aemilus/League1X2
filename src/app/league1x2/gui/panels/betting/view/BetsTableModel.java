@@ -1,7 +1,7 @@
 package app.league1x2.gui.panels.betting.view;
 
 import app.league1x2.constants.LeagueAppConstants;
-import app.league1x2.core.BetOdds;
+import app.league1x2.core.betting.BetOdds;
 
 import javax.swing.table.AbstractTableModel;
 import java.util.ArrayList;

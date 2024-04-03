@@ -1,4 +1,4 @@
-package app.league1x2.core;
+package app.league1x2.core.betting;
 
 public class Bet {
     private final String name;

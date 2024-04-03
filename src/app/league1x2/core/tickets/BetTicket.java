@@ -1,4 +1,6 @@
-package app.league1x2.core;
+package app.league1x2.core.tickets;
+
+import app.league1x2.core.betting.Bet;
 
 import java.util.ArrayList;
 
