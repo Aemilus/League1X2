@@ -15,6 +15,14 @@ public class BetTicket {
         return bets;
     }
 
+    public Double getOddsTotal() {
+        return oddsTotal;
+    }
+
+    public String getOddsTotalAsString() {
+        return String.format("%.2f", getOddsTotal());
+    }
+
     public void addBet(Bet bet) {
         this.oddsTotal = this.oddsTotal * bet.getOdd();
         bets.add(bet);

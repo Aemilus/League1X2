@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class FilterTicketsPanel extends JPanel {
-    private final FilterTicketsInputPanel filterTicketsInputPanel = new FilterTicketsInputPanel();
+    public final FilterTicketsInputPanel filterTicketsInputPanel = new FilterTicketsInputPanel();
     public final JButton filterTicketsButton = new JButton("Filtreaza");
 
     public FilterTicketsPanel() {

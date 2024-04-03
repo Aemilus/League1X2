@@ -5,9 +5,9 @@ import java.awt.*;
 
 @SuppressWarnings("FieldCanBeLocal")
 public class FilterTicketsInputPanel extends JPanel {
-    public final JTextField minTicketOddsTotal = new JTextField("1.00", 10);
+    public final JTextField minTicketOddsTotal = new JTextField("", 10);
     private final JLabel separator = new JLabel("-");
-    public final JTextField maxTicketOddsTotal = new JTextField("1.00", 10);
+    public final JTextField maxTicketOddsTotal = new JTextField("", 10);
 
     public FilterTicketsInputPanel() {
         setLayout(new BorderLayout(5, 5));
