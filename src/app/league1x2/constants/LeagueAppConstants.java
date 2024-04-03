@@ -1,6 +1,8 @@
 package app.league1x2.constants;
 
 public final class LeagueAppConstants {
+    public static final Double VALID_ODDS = Double.parseDouble("1.00");
+
     public final static String GAME = "Meci";
     public final static String SELECTION = "Selectie";
     public final static String ODDS = "Cota";

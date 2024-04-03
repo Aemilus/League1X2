@@ -1,5 +1,6 @@
 package app.league1x2.core;
 
+import app.league1x2.constants.LeagueAppConstants;
 import app.league1x2.core.betting.Bet;
 import app.league1x2.core.betting.BetOdds;
 import app.league1x2.core.db.BetTicketsDatabase;
@@ -20,8 +21,11 @@ public class LeagueCore {
         for (BetOdds betOdds : betsTableModel.data) {
             ArrayList<Bet> gameBets = new ArrayList<>();
             for (Map.Entry<String, Double> betOdd : betOdds.oddsMap.entrySet()) {
-                Bet bet = new Bet(betOdds.name, betOdd.getKey(), betOdd.getValue());
-                gameBets.add(bet);
+                System.out.println(betOdd);
+                if (Double.compare(betOdd.getValue(), LeagueAppConstants.VALID_ODDS) > 0) {
+                    Bet bet = new Bet(betOdds.name, betOdd.getKey(), betOdd.getValue());
+                    gameBets.add(bet);
+                }
             }
             bets.add(gameBets);
         }

@@ -16,6 +16,8 @@ public class BetTicketsDatabase {
     }
 
     private void findMinMaxTicket() {
+        if (betTickets.isEmpty()) return;
+
         minTicket = betTickets.getFirst();
         maxTicket = betTickets.getFirst();
 
