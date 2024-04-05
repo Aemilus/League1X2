@@ -1,10 +1,15 @@
 
 package app.league1x2;
 
+import app.league1x2.constants.LeagueAppConstants;
 import app.league1x2.core.betting.BetOdds;
+import app.league1x2.core.tickets.BetTicket;
 import app.league1x2.core.tickets.BetTickets;
 import app.league1x2.core.LeagueCore;
 import app.league1x2.gui.LeagueGUI;
+
+import java.text.MessageFormat;
+import java.util.ArrayList;
 
 @SuppressWarnings("unused")
 public final class LeagueApp {
@@ -17,7 +22,8 @@ public final class LeagueApp {
         configGenerateTicketsButton();
         configForwardButton();
         configBackwardButton();
-        configFilterTicketsButton();
+        configApplyFilterTicketsButton();
+        configResetFilterTicketsButton();
     }
 
     private void configAddBetButton() {
@@ -46,16 +52,18 @@ public final class LeagueApp {
                 return;
             }
             BetTickets tickets = core.generateTickets(gui.getBetsTablePanel().betsTableModel);
-//            tickets.print();
-            core.betTicketsDatabase.setBetTickets(tickets);
+            if (LeagueAppConstants.DEBUG) {
+                tickets.print();
+            }
+            core.activeBetTicketsDatabase.setBetTickets(tickets);
             refreshDisplayTicketsPanel();
         });
     }
 
     private void refreshDisplayTicketsPanel() {
-        if (core.betTicketsDatabase.size() > 0) {
-            core.betTicketsDatabase.setCursor(1);
-            gui.getTicketTablePanel().ticketTableModel.setData(core.betTicketsDatabase.get());
+        if (core.activeBetTicketsDatabase.size() > 0) {
+            core.activeBetTicketsDatabase.setCursor(1);
+            gui.getTicketTablePanel().ticketTableModel.setData(core.activeBetTicketsDatabase.get());
             gui.getTicketTablePanel().ticketTableModel.fireTableDataChanged();
             updateCurrentTicketTextFields();
             updateFilterTicketsInputPanel();
@@ -64,9 +72,9 @@ public final class LeagueApp {
 
     private void configForwardButton() {
         gui.getTicketsNavigationPanel().forwardButton.addActionListener(event -> {
-            if (core.betTicketsDatabase.size() > 0) {
-                core.betTicketsDatabase.forwardCursor();
-                gui.getTicketTablePanel().ticketTableModel.setData(core.betTicketsDatabase.get());
+            if (core.activeBetTicketsDatabase.size() > 0) {
+                core.activeBetTicketsDatabase.forwardCursor();
+                gui.getTicketTablePanel().ticketTableModel.setData(core.activeBetTicketsDatabase.get());
                 gui.getTicketTablePanel().ticketTableModel.fireTableDataChanged();
                 updateCurrentTicketTextFields();
             }
@@ -75,32 +83,63 @@ public final class LeagueApp {
 
     private void configBackwardButton() {
         gui.getTicketsNavigationPanel().backwardButton.addActionListener(event -> {
-            if (core.betTicketsDatabase.size() > 0) {
-                core.betTicketsDatabase.backwardCursor();
-                gui.getTicketTablePanel().ticketTableModel.setData(core.betTicketsDatabase.get());
+            if (core.activeBetTicketsDatabase.size() > 0) {
+                core.activeBetTicketsDatabase.backwardCursor();
+                gui.getTicketTablePanel().ticketTableModel.setData(core.activeBetTicketsDatabase.get());
                 gui.getTicketTablePanel().ticketTableModel.fireTableDataChanged();
                 updateCurrentTicketTextFields();
             }
         });
     }
 
-    private void configFilterTicketsButton() {
+    private void configApplyFilterTicketsButton() {
+        gui.getFilterTicketsControlPanel().applyFilterTicketsButton.addActionListener(event -> {
+            String minText = gui.getFilterTicketsInputPanel().minTicketOddsTotal.getText().trim();
+            String maxText = gui.getFilterTicketsInputPanel().maxTicketOddsTotal.getText().trim();
+            if (minText.isEmpty()) return;
+            if (maxText.isEmpty()) return;
+
+            double inputMin = Double.parseDouble(minText);
+            double inputMax = Double.parseDouble(maxText);
+            if (inputMin < LeagueAppConstants.VALID_ODDS) return;
+            if (inputMax < LeagueAppConstants.VALID_ODDS) return;
+            if (inputMax < inputMin) return;
+
+            core.filterTickets(inputMin, inputMax);
+            gui.getTicketTablePanel().ticketTableModel.setData(core.activeBetTicketsDatabase.get());
+            gui.getTicketTablePanel().ticketTableModel.fireTableDataChanged();
+            updateCurrentTicketTextFields();
+        });
+    }
+
+    private void configResetFilterTicketsButton() {
 
     }
 
     private void updateCurrentTicketTextFields() {
-        String msg = STR."\{core.betTicketsDatabase.getCursor()} / \{core.betTicketsDatabase.size()}";
+        String msg = MessageFormat.format("{0} / {1}",
+                core.activeBetTicketsDatabase.getCursor(), core.activeBetTicketsDatabase.size());
         gui.getTicketsNavigationPanel().
                 currentTicketTextField.setText(msg);
-        gui.getTicketsNavigationPanel().
-                currentTicketTotalOddsTextField.setText(core.betTicketsDatabase.get().getOddsTotalAsString());
+        if (core.activeBetTicketsDatabase.size() > 0) {
+            String odds = core.activeBetTicketsDatabase.get().getOddsTotalAsString();
+            gui.getTicketsNavigationPanel().
+                    currentTicketTotalOddsTextField.setText(odds);
+        }
     }
 
     private void updateFilterTicketsInputPanel() {
+        String minText = "";
+        String maxText = "";
+        ArrayList<BetTicket> range = core.getTicketsRange();
+        if (range != null) {
+            minText = range.get(0).getOddsTotalAsString();
+            maxText = range.get(1).getOddsTotalAsString();
+        }
         gui.getFilterTicketsInputPanel().
-                minTicketOddsTotal.setText(core.betTicketsDatabase.minTicket.getOddsTotalAsString());
+                minTicketOddsTotal.setText(minText);
         gui.getFilterTicketsInputPanel().
-                maxTicketOddsTotal.setText(core.betTicketsDatabase.maxTicket.getOddsTotalAsString());
+                maxTicketOddsTotal.setText(maxText);
     }
 
     private void start() {

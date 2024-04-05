@@ -3,7 +3,9 @@ package app.league1x2.core;
 import app.league1x2.constants.LeagueAppConstants;
 import app.league1x2.core.betting.Bet;
 import app.league1x2.core.betting.BetOdds;
+import app.league1x2.core.db.AllBetTicketsDatabase;
 import app.league1x2.core.db.BetTicketsDatabase;
+import app.league1x2.core.db.FilteredBetTicketsDatabase;
 import app.league1x2.core.tickets.BetTicket;
 import app.league1x2.core.tickets.BetTickets;
 import app.league1x2.gui.panels.betting.view.BetsTableModel;
@@ -14,7 +16,9 @@ import java.util.List;
 import java.util.Map;
 
 public class LeagueCore {
-    public final BetTicketsDatabase betTicketsDatabase = new BetTicketsDatabase();
+    private final AllBetTicketsDatabase allBetTicketsDatabase = new AllBetTicketsDatabase();
+    private final FilteredBetTicketsDatabase filteredBetTicketsDatabase = new FilteredBetTicketsDatabase();
+    public BetTicketsDatabase activeBetTicketsDatabase = allBetTicketsDatabase;
 
     private List<List<Bet>> extractBetsFromModel(BetsTableModel betsTableModel) {
         List<List<Bet>> bets = new ArrayList<>();
@@ -32,13 +36,15 @@ public class LeagueCore {
     }
 
     public BetTickets generateTickets(BetsTableModel betsTableModel) {
+        clearFilterTickets();
         CartesianProduct<Bet> cp = new CartesianProduct<>();
         List<List<Bet>> cpBet = cp.getCartesianProduct(extractBetsFromModel(betsTableModel));
         int betTicketsCount = 0;
         BetTickets betTickets = new BetTickets();
         for (List<Bet> betList : cpBet) {
             betTicketsCount++;
-            BetTicket betTicket = new BetTicket(STR."Bilet \{betTicketsCount}");
+            String betTicketName = "Bilet %d".formatted(betTicketsCount);
+            BetTicket betTicket = new BetTicket(betTicketName);
             for (Bet bet : betList) {
                 betTicket.addBet(bet);
             }
@@ -46,6 +52,27 @@ public class LeagueCore {
         }
 
         return betTickets;
+    }
+
+    public ArrayList<BetTicket> getTicketsRange() {
+        if (allBetTicketsDatabase.size() == 0) {
+            return null;
+        }
+        ArrayList<BetTicket> range = new ArrayList<>();
+        range.add(allBetTicketsDatabase.minTicket);
+        range.add(allBetTicketsDatabase.maxTicket);
+        return  range;
+    }
+
+    public void filterTickets(double filterMinTotalOdds, double filterMaxTotalOdds) {
+        filteredBetTicketsDatabase.betTickets.clear();
+        activeBetTicketsDatabase = filteredBetTicketsDatabase;
+        System.out.println("Add logic to filter tickets.");
+    }
+
+    public void clearFilterTickets() {
+        filteredBetTicketsDatabase.betTickets.clear();
+        activeBetTicketsDatabase = allBetTicketsDatabase;
     }
 
 }
