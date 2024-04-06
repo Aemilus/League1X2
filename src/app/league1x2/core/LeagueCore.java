@@ -67,7 +67,13 @@ public class LeagueCore {
     public void filterTickets(double filterMinTotalOdds, double filterMaxTotalOdds) {
         filteredBetTicketsDatabase.betTickets.clear();
         activeBetTicketsDatabase = filteredBetTicketsDatabase;
-        System.out.println("Add logic to filter tickets.");
+        for (BetTicket betTicket : allBetTicketsDatabase.betTickets) {
+            if (betTicket.getOddsTotal() >= filterMinTotalOdds) {
+                if (betTicket.getOddsTotal() <= filterMaxTotalOdds) {
+                    filteredBetTicketsDatabase.betTickets.add(betTicket);
+                }
+            }
+        }
     }
 
     public void clearFilterTickets() {

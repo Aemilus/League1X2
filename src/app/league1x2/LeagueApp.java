@@ -113,7 +113,9 @@ public final class LeagueApp {
     }
 
     private void configResetFilterTicketsButton() {
-
+        gui.getFilterTicketsControlPanel().resetFilterTicketsButton.addActionListener(event -> {
+            System.out.println("Please add logic to reset.");
+        });
     }
 
     private void updateCurrentTicketTextFields() {
@@ -121,11 +123,14 @@ public final class LeagueApp {
                 core.activeBetTicketsDatabase.getCursor(), core.activeBetTicketsDatabase.size());
         gui.getTicketsNavigationPanel().
                 currentTicketTextField.setText(msg);
+        String odds;
         if (core.activeBetTicketsDatabase.size() > 0) {
-            String odds = core.activeBetTicketsDatabase.get().getOddsTotalAsString();
-            gui.getTicketsNavigationPanel().
-                    currentTicketTotalOddsTextField.setText(odds);
+            odds = core.activeBetTicketsDatabase.get().getOddsTotalAsString();
+        } else {
+            odds = null;
         }
+        gui.getTicketsNavigationPanel().
+                currentTicketTotalOddsTextField.setText(odds);
     }
 
     private void updateFilterTicketsInputPanel() {
