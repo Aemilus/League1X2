@@ -29,9 +29,13 @@ public final class LeagueApp {
     private void configAddBetButton() {
         gui.getBetInputPanel().betAddPanel.addBetButton.addActionListener(event -> {
             BetOdds betOdds = gui.getBetInputPanel().getBetOdds();
-            gui.getBetInputPanel().betNamePanel.setNextBetName();
-            gui.getBetsTablePanel().betsTableModel.addRow(betOdds);
-            gui.getBetsTablePanel().betsTableModel.fireTableDataChanged();
+            if (betOdds.isValid()) {
+                gui.getBetInputPanel().betNamePanel.setNextBetName();
+                gui.getBetsTablePanel().betsTableModel.addRow(betOdds);
+                gui.getBetsTablePanel().betsTableModel.fireTableDataChanged();
+                int count = gui.getBetsTablePanel().betsTableModel.getRowCount();
+                gui.getBetsControlPanel().gamesCountTextField.setText(String.valueOf(count));
+            }
         });
     }
 
