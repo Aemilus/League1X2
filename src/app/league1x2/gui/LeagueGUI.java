@@ -5,8 +5,8 @@ import app.league1x2.gui.frame.LeagueFrame;
 import app.league1x2.gui.panels.betting.control.BetsControlPanel;
 import app.league1x2.gui.panels.betting.input.BetInputPanel;
 import app.league1x2.gui.panels.betting.table.BetsTablePanel;
-import app.league1x2.gui.panels.filter.FilterTicketsControlPanel;
-import app.league1x2.gui.panels.filter.FilterTicketsInputPanel;
+import app.league1x2.gui.panels.filter.control.FilterTicketsControlPanel;
+import app.league1x2.gui.panels.filter.range.FilterTicketsRangePanel;
 import app.league1x2.gui.panels.tickets.navigate.TicketsNavigationPanel;
 import app.league1x2.gui.panels.tickets.stats.TicketsStatsPanel;
 import app.league1x2.gui.panels.tickets.table.TicketTablePanel;
@@ -61,8 +61,8 @@ public class LeagueGUI {
         return frame.framePanel.ticketsRootPanel.ticketsNavigationPanel;
     }
 
-    public FilterTicketsInputPanel getFilterTicketsInputPanel() {
-        return frame.framePanel.filterRootPanel.filterTicketsInputPanel;
+    public FilterTicketsRangePanel getFilterTicketsInputPanel() {
+        return frame.framePanel.filterRootPanel.filterTicketsRangePanel;
     }
 
     public FilterTicketsControlPanel getFilterTicketsControlPanel() {

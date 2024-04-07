@@ -10,7 +10,7 @@ public class BetNamePanel extends JPanel {
     private final JTextField betNameTextField;
 
     public BetNamePanel() {
-        betNameTextField = new JTextField("", 15);
+        betNameTextField = new JTextField(null, 15);
         setNextBetName();
         betNameTextField.setMargin(new Insets(2, 4, 2, 4));
         setLayout(new BorderLayout(5, 5));

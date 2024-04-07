@@ -8,7 +8,7 @@ import java.util.LinkedHashMap;
 
 public class BetInputPanel extends JPanel {
     public final BetNamePanel betNamePanel = new BetNamePanel();
-    private final BetOddsPanel betOddsPanel = new BetOddsPanel();
+    public final BetOddsPanel betOddsPanel = new BetOddsPanel();
     public final BetAddPanel betAddPanel = new BetAddPanel();
 
     public BetInputPanel() {

@@ -28,4 +28,10 @@ public class BetOddsPanel extends JPanel {
         return betOddsMap;
     }
 
+    public void clear() {
+        for (BetOddPanel betOddPanel : betOddPanelsList) {
+            betOddPanel.betOddTextField.setText(null);
+        }
+    }
+
 }

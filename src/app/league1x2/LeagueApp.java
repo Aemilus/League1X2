@@ -33,8 +33,10 @@ public final class LeagueApp {
                 gui.getBetInputPanel().betNamePanel.setNextBetName();
                 gui.getBetsTablePanel().betsTableModel.addRow(betOdds);
                 gui.getBetsTablePanel().betsTableModel.fireTableDataChanged();
+
                 int count = gui.getBetsTablePanel().betsTableModel.getRowCount();
                 gui.getBetsControlPanel().gamesCountTextField.setText(String.valueOf(count));
+                gui.getBetInputPanel().betOddsPanel.clear();
             }
         });
     }

@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class BetOddPanel extends JPanel {
-    private JTextField betOddTextField;
+    public JTextField betOddTextField;
     private final String selection;
 
     public BetOddPanel(String selection, int columns) {
