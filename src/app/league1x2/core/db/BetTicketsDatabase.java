@@ -5,6 +5,8 @@ import app.league1x2.core.tickets.BetTickets;
 
 public interface BetTicketsDatabase {
 
+    void clear();
+
     void setBetTickets(BetTickets betTickets);
 
     int size();

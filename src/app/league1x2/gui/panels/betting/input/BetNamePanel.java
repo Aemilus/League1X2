@@ -2,6 +2,7 @@ package app.league1x2.gui.panels.betting.input;
 
 import javax.swing.*;
 import java.awt.*;
+import java.text.MessageFormat;
 
 public class BetNamePanel extends JPanel {
     private static int count = 0;
@@ -13,7 +14,7 @@ public class BetNamePanel extends JPanel {
         setNextBetName();
         betNameTextField.setMargin(new Insets(2, 4, 2, 4));
         setLayout(new BorderLayout(5, 5));
-        add(betNameTextField, BorderLayout.WEST);
+        add(betNameTextField, BorderLayout.CENTER);
     }
 
     public String getBetName() {
@@ -22,7 +23,8 @@ public class BetNamePanel extends JPanel {
 
     public void setNextBetName() {
         count++;
-        betNameTextField.setText(STR."Meci \{count}");
+        String msg = MessageFormat.format("Meci {0}", count);
+        betNameTextField.setText(msg);
     }
 
 }

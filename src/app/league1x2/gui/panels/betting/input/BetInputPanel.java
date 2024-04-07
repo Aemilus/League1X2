@@ -9,13 +9,13 @@ import java.util.LinkedHashMap;
 public class BetInputPanel extends JPanel {
     public final BetNamePanel betNamePanel = new BetNamePanel();
     private final BetOddsPanel betOddsPanel = new BetOddsPanel();
-    public final AddBetPanel addBetPanel = new AddBetPanel();
+    public final BetAddPanel betAddPanel = new BetAddPanel();
 
     public BetInputPanel() {
         setLayout(new BorderLayout(5, 5));
-        add(betNamePanel, BorderLayout.WEST);
+        add(betNamePanel, BorderLayout.NORTH);
         add(betOddsPanel, BorderLayout.CENTER);
-        add(addBetPanel, BorderLayout.EAST);
+        add(betAddPanel, BorderLayout.EAST);
     }
 
     public BetOdds getBetOdds() {

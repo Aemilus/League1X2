@@ -27,7 +27,7 @@ public final class LeagueApp {
     }
 
     private void configAddBetButton() {
-        gui.getBetInputPanel().addBetPanel.addBetButton.addActionListener(event -> {
+        gui.getBetInputPanel().betAddPanel.addBetButton.addActionListener(event -> {
             BetOdds betOdds = gui.getBetInputPanel().getBetOdds();
             gui.getBetInputPanel().betNamePanel.setNextBetName();
             gui.getBetsTablePanel().betsTableModel.addRow(betOdds);
@@ -66,7 +66,7 @@ public final class LeagueApp {
             gui.getTicketTablePanel().ticketTableModel.setData(core.activeBetTicketsDatabase.get());
             gui.getTicketTablePanel().ticketTableModel.fireTableDataChanged();
             updateCurrentTicketTextFields();
-            updateFilterTicketsInputPanel();
+            updateTicketsStatsPanel();
         }
     }
 
@@ -113,7 +113,7 @@ public final class LeagueApp {
     }
 
     private void configResetFilterTicketsButton() {
-        gui.getFilterTicketsControlPanel().resetFilterTicketsButton.addActionListener(event -> {
+        gui.getTicketsStatsPanel().resetFilterTicketsButton.addActionListener(event -> {
             System.out.println("Please add logic to reset.");
         });
     }
@@ -129,22 +129,22 @@ public final class LeagueApp {
         } else {
             odds = null;
         }
-        gui.getTicketsNavigationPanel().
+        gui.getTicketsStatsPanel().
                 currentTicketTotalOddsTextField.setText(odds);
     }
 
-    private void updateFilterTicketsInputPanel() {
-        String minText = "";
-        String maxText = "";
+    private void updateTicketsStatsPanel() {
+        String minText = null;
+        String maxText = null;
         ArrayList<BetTicket> range = core.getTicketsRange();
         if (range != null) {
             minText = range.get(0).getOddsTotalAsString();
             maxText = range.get(1).getOddsTotalAsString();
         }
-        gui.getFilterTicketsInputPanel().
-                minTicketOddsTotal.setText(minText);
-        gui.getFilterTicketsInputPanel().
-                maxTicketOddsTotal.setText(maxText);
+        gui.getTicketsStatsPanel().
+                minTicketTotalOddsTextField.setText(minText);
+        gui.getTicketsStatsPanel().
+                maxTicketTotalOddsTextField.setText(maxText);
     }
 
     private void start() {

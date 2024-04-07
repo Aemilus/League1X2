@@ -8,6 +8,12 @@ public class BaseBetTicketsDatabase implements BetTicketsDatabase {
     private int cursor;
 
     @Override
+    public void clear() {
+        betTickets.clear();
+        cursor = 0;
+    }
+
+    @Override
     public void setBetTickets(BetTickets betTickets) {
         this.betTickets = betTickets;
         cursor = 0;

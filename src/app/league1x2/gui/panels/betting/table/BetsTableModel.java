@@ -1,4 +1,4 @@
-package app.league1x2.gui.panels.betting.view;
+package app.league1x2.gui.panels.betting.table;
 
 import app.league1x2.constants.LeagueAppConstants;
 import app.league1x2.core.betting.BetOdds;

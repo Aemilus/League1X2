@@ -1,6 +1,8 @@
 
 package app.league1x2.gui.frame;
 
+import app.league1x2.constants.LeagueAppConstants;
+
 import javax.swing.*;
 import java.awt.*;
 import java.net.URL;
@@ -25,7 +27,7 @@ public class LeagueFrame extends JFrame {
 
     private void initFrame() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setPreferredSize(new Dimension(950, 400));
+        setPreferredSize(new Dimension(LeagueAppConstants.WIDTH, LeagueAppConstants.HEIGHT));
         setResizable(true);
         setLocationByPlatform(true);
         setLayout(new BorderLayout(5,5));

@@ -13,8 +13,9 @@ public class BetOddsPanel extends JPanel {
     public BetOddsPanel() {
         setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
         for (String selection : LeagueAppConstants.SELECTIONS) {
-            BetOddPanel betOddPanel = new BetOddPanel(selection, 6);
+            BetOddPanel betOddPanel = new BetOddPanel(selection, 4);
             add(betOddPanel);
+            add(Box.createHorizontalStrut(10));
             betOddPanelsList.add(betOddPanel);
         }
     }

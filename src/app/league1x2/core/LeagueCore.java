@@ -8,7 +8,7 @@ import app.league1x2.core.db.BetTicketsDatabase;
 import app.league1x2.core.db.FilteredBetTicketsDatabase;
 import app.league1x2.core.tickets.BetTicket;
 import app.league1x2.core.tickets.BetTickets;
-import app.league1x2.gui.panels.betting.view.BetsTableModel;
+import app.league1x2.gui.panels.betting.table.BetsTableModel;
 import app.league1x2.utils.CartesianProduct;
 
 import java.util.ArrayList;
@@ -65,7 +65,7 @@ public class LeagueCore {
     }
 
     public void filterTickets(double filterMinTotalOdds, double filterMaxTotalOdds) {
-        filteredBetTicketsDatabase.betTickets.clear();
+        filteredBetTicketsDatabase.clear();
         activeBetTicketsDatabase = filteredBetTicketsDatabase;
         for (BetTicket betTicket : allBetTicketsDatabase.betTickets) {
             if (betTicket.getOddsTotal() >= filterMinTotalOdds) {

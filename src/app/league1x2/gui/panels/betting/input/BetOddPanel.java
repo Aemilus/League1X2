@@ -10,13 +10,12 @@ public class BetOddPanel extends JPanel {
     public BetOddPanel(String selection, int columns) {
         this.selection = selection;
         initBetOddTextField(columns);
-        setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
-        add(Box.createHorizontalStrut(5));
-        add(betOddTextField);
+        setLayout(new BorderLayout(5, 5));
+        add(betOddTextField, BorderLayout.CENTER);
     }
 
     private void initBetOddTextField(int columns) {
-        betOddTextField = new JTextField("", columns);
+        betOddTextField = new JTextField(null, columns);
         betOddTextField.setMargin(new Insets(2, 4, 2, 4));
         betOddTextField.setHorizontalAlignment(SwingConstants.CENTER);
     }
