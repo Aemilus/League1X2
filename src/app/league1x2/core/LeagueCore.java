@@ -6,6 +6,8 @@ import app.league1x2.core.betting.BetOdds;
 import app.league1x2.core.db.AllBetTicketsDatabase;
 import app.league1x2.core.db.BetTicketsDatabase;
 import app.league1x2.core.db.FilteredBetTicketsDatabase;
+import app.league1x2.core.filter.FilterTotalOddsRange;
+import app.league1x2.core.filter.SelectionRange;
 import app.league1x2.core.tickets.BetTicket;
 import app.league1x2.core.tickets.BetTickets;
 import app.league1x2.gui.panels.betting.table.BetsTableModel;
@@ -61,18 +63,36 @@ public class LeagueCore {
         ArrayList<BetTicket> range = new ArrayList<>();
         range.add(allBetTicketsDatabase.minTicket);
         range.add(allBetTicketsDatabase.maxTicket);
-        return  range;
+        return range;
     }
 
-    public void filterTickets(double filterMinTotalOdds, double filterMaxTotalOdds) {
+    public void filterTickets(FilterTotalOddsRange filterTotalOddsRange,
+                              ArrayList<SelectionRange> filterSelectionsRange) {
+        if (LeagueAppConstants.DEBUG) {
+            System.out.println(filterTotalOddsRange);
+            System.out.println(filterSelectionsRange);
+        }
+
+        BetTicketsDatabase tempDatabase = new FilteredBetTicketsDatabase();
+
+        if (filterTotalOddsRange.isValid()) {
+            for (BetTicket betTicket : allBetTicketsDatabase.betTickets) {
+                if (betTicket.getOddsTotal() < filterTotalOddsRange.minTotalOdds) continue;
+                if (betTicket.getOddsTotal() > filterTotalOddsRange.maxTotalOdds) continue;
+                tempDatabase.add(betTicket);
+            }
+        } else {
+            tempDatabase = allBetTicketsDatabase;
+        }
+
         filteredBetTicketsDatabase.clear();
         activeBetTicketsDatabase = filteredBetTicketsDatabase;
-        for (BetTicket betTicket : allBetTicketsDatabase.betTickets) {
-            if (betTicket.getOddsTotal() >= filterMinTotalOdds) {
-                if (betTicket.getOddsTotal() <= filterMaxTotalOdds) {
-                    filteredBetTicketsDatabase.betTickets.add(betTicket);
-                }
+        loop1:
+        for (BetTicket betTicket : tempDatabase.getBetTickets()) {
+            for (SelectionRange selectionRange : filterSelectionsRange) {
+                if (!selectionRange.isInRange(betTicket)) continue loop1;
             }
+            filteredBetTicketsDatabase.add(betTicket);
         }
     }
 

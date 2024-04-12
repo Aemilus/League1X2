@@ -9,7 +9,11 @@ public interface BetTicketsDatabase {
 
     void setBetTickets(BetTickets betTickets);
 
+    BetTickets getBetTickets();
+
     int size();
+
+    boolean add(BetTicket betTicket);
 
     BetTicket get();
 

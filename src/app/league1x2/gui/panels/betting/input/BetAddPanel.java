@@ -7,13 +7,9 @@ public class BetAddPanel extends JPanel {
     public JButton addBetButton = new JButton("Adauga cotele");
 
     public BetAddPanel() {
-        initAddBetButton();
+        addBetButton.setFocusPainted(false);
         setLayout(new BorderLayout(5, 5));
         add(addBetButton, BorderLayout.CENTER);
     }
 
-    private void initAddBetButton() {
-        addBetButton.setFocusPainted(false);
-//        addBetButton.setContentAreaFilled(false);
-    }
 }

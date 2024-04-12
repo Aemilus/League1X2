@@ -3,6 +3,8 @@ package app.league1x2;
 
 import app.league1x2.constants.LeagueAppConstants;
 import app.league1x2.core.betting.BetOdds;
+import app.league1x2.core.filter.FilterTotalOddsRange;
+import app.league1x2.core.filter.SelectionRange;
 import app.league1x2.core.tickets.BetTicket;
 import app.league1x2.core.tickets.BetTickets;
 import app.league1x2.core.LeagueCore;
@@ -100,18 +102,10 @@ public final class LeagueApp {
 
     private void configApplyFilterTicketsButton() {
         gui.getFilterTicketsControlPanel().applyFilterTicketsButton.addActionListener(event -> {
-            String minText = gui.getFilterTicketsInputPanel().minTicketOddsTotal.getText().trim();
-            String maxText = gui.getFilterTicketsInputPanel().maxTicketOddsTotal.getText().trim();
-            if (minText.isEmpty()) return;
-            if (maxText.isEmpty()) return;
+            FilterTotalOddsRange filterTotalOddsRange = gui.getFilterTicketsInputPanel().getTotalOddsRangeFilter();
+            ArrayList<SelectionRange> filterSelectionRanges = gui.getFilterSelectionsPanel().getSelectionsRange();
 
-            double inputMin = Double.parseDouble(minText);
-            double inputMax = Double.parseDouble(maxText);
-            if (inputMin < LeagueAppConstants.VALID_ODDS) return;
-            if (inputMax < LeagueAppConstants.VALID_ODDS) return;
-            if (inputMax < inputMin) return;
-
-            core.filterTickets(inputMin, inputMax);
+            core.filterTickets(filterTotalOddsRange, filterSelectionRanges);
             gui.getTicketTablePanel().ticketTableModel.setData(core.activeBetTicketsDatabase.get());
             gui.getTicketTablePanel().ticketTableModel.fireTableDataChanged();
             updateCurrentTicketTextFields();
@@ -120,7 +114,8 @@ public final class LeagueApp {
 
     private void configResetFilterTicketsButton() {
         gui.getTicketsStatsPanel().resetFilterTicketsButton.addActionListener(event -> {
-            System.out.println("Please add logic to reset.");
+            core.clearFilterTickets();
+            refreshDisplayTicketsPanel();
         });
     }
 

@@ -20,6 +20,11 @@ public class BaseBetTicketsDatabase implements BetTicketsDatabase {
     }
 
     @Override
+    public BetTickets getBetTickets() {
+        return betTickets;
+    }
+
+    @Override
     public int size() {
         return betTickets.size();
     }
@@ -28,6 +33,11 @@ public class BaseBetTicketsDatabase implements BetTicketsDatabase {
     public void setCursor(int cursor) {
         this.cursor = cursor;
         backwardCursor();
+    }
+
+    @Override
+    public boolean add(BetTicket betTicket) {
+        return betTickets.add(betTicket);
     }
 
     @Override

@@ -1,6 +1,6 @@
 package app.league1x2.gui.panels.filter.selection;
 
-import app.league1x2.core.selection.SelectionRange;
+import app.league1x2.core.filter.SelectionRange;
 
 import javax.swing.*;
 import java.awt.*;
