@@ -1,7 +1,5 @@
 package app.league1x2.core.filter;
 
-import app.league1x2.constants.LeagueAppConstants;
-
 import java.text.MessageFormat;
 
 public class FilterTotalOddsRange {
@@ -14,7 +12,10 @@ public class FilterTotalOddsRange {
     }
 
     public boolean isValid() {
-        return (minTotalOdds != null) && (maxTotalOdds != null) && !(maxTotalOdds < minTotalOdds);
+        return (minTotalOdds != null) &&
+               (maxTotalOdds != null) &&
+               !(minTotalOdds<0) &&
+               !(maxTotalOdds < minTotalOdds);
     }
 
     private Double parseTotalOddsText(String totalOddsText) {
@@ -29,13 +30,15 @@ public class FilterTotalOddsRange {
         } catch (NumberFormatException e) {
             return null;
         }
-        if (totalOdds < LeagueAppConstants.VALID_ODDS) return null;
+        if (totalOdds < 0) return null;
 
         return totalOdds;
     }
 
     @Override
     public String toString() {
-        return MessageFormat.format("FilterTotalOddsRange'{'minTotalOdds={0}, maxTotalOdds={1}'}'", minTotalOdds, maxTotalOdds);
+        return MessageFormat.format(
+                "FilterTotalOddsRange'{'minTotalOdds={0}, maxTotalOdds={1}'}'",
+                minTotalOdds, maxTotalOdds);
     }
 }

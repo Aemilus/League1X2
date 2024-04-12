@@ -28,17 +28,20 @@ public final class LeagueApp {
         configResetFilterTicketsButton();
     }
 
+    private void updateBetInputPanel() {
+        gui.getBetsTablePanel().betsTableModel.fireTableDataChanged();
+        int row_count = gui.getBetsTablePanel().betsTableModel.getRowCount();
+        gui.getBetsControlPanel().gamesCountTextField.setText(String.valueOf(row_count));
+        gui.getBetInputPanel().betOddsPanel.clear();
+    }
+
     private void configAddBetButton() {
         gui.getBetInputPanel().betAddPanel.addBetButton.addActionListener(event -> {
             BetOdds betOdds = gui.getBetInputPanel().getBetOdds();
             if (betOdds.isValid()) {
-                gui.getBetInputPanel().betNamePanel.setNextBetName();
                 gui.getBetsTablePanel().betsTableModel.addRow(betOdds);
-                gui.getBetsTablePanel().betsTableModel.fireTableDataChanged();
-
-                int count = gui.getBetsTablePanel().betsTableModel.getRowCount();
-                gui.getBetsControlPanel().gamesCountTextField.setText(String.valueOf(count));
-                gui.getBetInputPanel().betOddsPanel.clear();
+                gui.getBetInputPanel().betNamePanel.setNextBetName();
+                updateBetInputPanel();
             }
         });
     }
@@ -46,11 +49,13 @@ public final class LeagueApp {
     private void configDeleteBetOddsButton() {
         gui.getBetsControlPanel().deleteBetOddsButton.addActionListener(event -> {
             int[] rowsIndex = gui.getBetsTablePanel().betsTable.getSelectedRows();
-            for(int i=rowsIndex.length - 1; i>=0; i--) {
-                int rowIndex = rowsIndex[i];
-                gui.getBetsTablePanel().betsTableModel.removeRow(rowIndex);
+            if (rowsIndex.length > 0) {
+                for (int i = rowsIndex.length - 1; i >= 0; i--) {
+                    int rowIndex = rowsIndex[i];
+                    gui.getBetsTablePanel().betsTableModel.removeRow(rowIndex);
+                }
+                updateBetInputPanel();
             }
-            gui.getBetsTablePanel().betsTableModel.fireTableDataChanged();
         });
     }
 
@@ -101,7 +106,7 @@ public final class LeagueApp {
     }
 
     private void configApplyFilterTicketsButton() {
-        gui.getFilterTicketsControlPanel().applyFilterTicketsButton.addActionListener(event -> {
+        gui.getFiltersRootPanel().applyFiltersButton.addActionListener(event -> {
             FilterTotalOddsRange filterTotalOddsRange = gui.getFilterTicketsInputPanel().getTotalOddsRangeFilter();
             ArrayList<SelectionRange> filterSelectionRanges = gui.getFilterSelectionsPanel().getSelectionsRange();
 
@@ -150,6 +155,8 @@ public final class LeagueApp {
 
     private void start() {
         gui.draw();
+        gui.getBetInputPanel().betNamePanel.setNextBetName();
+        updateBetInputPanel();
     }
 
     public static void main(String[] args) {

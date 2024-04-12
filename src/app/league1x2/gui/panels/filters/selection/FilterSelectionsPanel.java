@@ -1,4 +1,4 @@
-package app.league1x2.gui.panels.filter.selection;
+package app.league1x2.gui.panels.filters.selection;
 
 import app.league1x2.constants.LeagueAppConstants;
 import app.league1x2.core.filter.SelectionRange;
@@ -30,6 +30,12 @@ public class FilterSelectionsPanel extends JPanel {
             }
         }
         return selectionRanges;
+    }
+
+    public void clear() {
+        for (FilterSelectionPanel filterSelectionPanel : filterSelectionPanelsList) {
+            filterSelectionPanel.clear();
+        }
     }
 
 }

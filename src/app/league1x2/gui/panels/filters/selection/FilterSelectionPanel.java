@@ -1,4 +1,4 @@
-package app.league1x2.gui.panels.filter.selection;
+package app.league1x2.gui.panels.filters.selection;
 
 import app.league1x2.core.filter.SelectionRange;
 
@@ -29,6 +29,10 @@ public class FilterSelectionPanel extends JPanel{
         String min = selectionRangePanel.minSelectionTextField.getText();
         String max = selectionRangePanel.maxSelectionTextField.getText();
         return new SelectionRange(selection, min, max);
+    }
+
+    public void clear() {
+        selectionRangePanel.clear();
     }
 
 }

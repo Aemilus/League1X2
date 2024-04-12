@@ -5,9 +5,9 @@ import app.league1x2.gui.frame.LeagueFrame;
 import app.league1x2.gui.panels.betting.control.BetsControlPanel;
 import app.league1x2.gui.panels.betting.input.BetInputPanel;
 import app.league1x2.gui.panels.betting.table.BetsTablePanel;
-import app.league1x2.gui.panels.filter.control.FilterTicketsControlPanel;
-import app.league1x2.gui.panels.filter.odds.FilterTotalOddsRangePanel;
-import app.league1x2.gui.panels.filter.selection.FilterSelectionsPanel;
+import app.league1x2.gui.panels.filters.FiltersRootPanel;
+import app.league1x2.gui.panels.filters.odds.FilterTotalOddsRangePanel;
+import app.league1x2.gui.panels.filters.selection.FilterSelectionsPanel;
 import app.league1x2.gui.panels.tickets.navigate.TicketsNavigationPanel;
 import app.league1x2.gui.panels.tickets.stats.TicketsStatsPanel;
 import app.league1x2.gui.panels.tickets.table.TicketTablePanel;
@@ -63,15 +63,15 @@ public class LeagueGUI {
     }
 
     public FilterTotalOddsRangePanel getFilterTicketsInputPanel() {
-        return frame.framePanel.filterRootPanel.filterTotalOddsRangePanel;
+        return frame.framePanel.filtersRootPanel.filtersPanel.filterTotalOddsRangePanel;
     }
 
     public FilterSelectionsPanel getFilterSelectionsPanel() {
-        return frame.framePanel.filterRootPanel.filterSelectionsPanel;
+        return frame.framePanel.filtersRootPanel.filtersPanel.filterSelectionsPanel;
     }
 
-    public FilterTicketsControlPanel getFilterTicketsControlPanel() {
-        return frame.framePanel.filterRootPanel.filterTicketsControlPanel;
+    public FiltersRootPanel getFiltersRootPanel() {
+        return frame.framePanel.filtersRootPanel;
     }
 
     //endregion

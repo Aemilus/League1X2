@@ -1,5 +1,7 @@
 package app.league1x2.core.betting;
 
+import java.text.MessageFormat;
+
 public class Bet {
     private final String name;
     private final String selection;
@@ -25,6 +27,8 @@ public class Bet {
 
     @Override
     public String toString() {
-        return STR."Bet{name='\{name}\{'\''}, selection='\{selection}\{'\''}, odd=\{odd}\{'}'}";
+        return MessageFormat.format(
+                "Bet'{'name=''{0}'', selection=''{1}'', odd={2}'}'",
+                name, selection, odd);
     }
 }

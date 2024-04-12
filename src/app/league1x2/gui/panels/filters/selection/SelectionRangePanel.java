@@ -1,4 +1,4 @@
-package app.league1x2.gui.panels.filter.selection;
+package app.league1x2.gui.panels.filters.selection;
 
 import javax.swing.*;
 import java.awt.*;
@@ -35,6 +35,11 @@ public class SelectionRangePanel extends JPanel {
     private void initMaxSelectionTextField() {
         maxSelectionTextField.setMargin(new Insets(2, 4, 2, 4));
         maxSelectionTextField.setHorizontalAlignment(SwingConstants.CENTER);
+    }
+
+    public void clear() {
+        minSelectionTextField.setText(null);
+        maxSelectionTextField.setText(null);
     }
 
 }
