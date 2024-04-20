@@ -46,7 +46,7 @@ public class LeagueCore {
         BetTickets betTickets = new BetTickets();
         for (List<Bet> betList : cpBet) {
             betTicketsCount++;
-            String betTicketName = MessageFormat.format("Bilet {0}", betTicketsCount);
+            String betTicketName = MessageFormat.format("{0} {1}", LeagueAppConstants.TICKET, betTicketsCount);
             BetTicket betTicket = new BetTicket(betTicketName);
             for (Bet bet : betList) {
                 betTicket.addBet(bet);
