@@ -33,6 +33,7 @@ public class LeagueGUI {
     }
 
     public void draw() {
+        frame.setLocationRelativeTo(null);
         setLookAndFeel();
         SwingUtilities.invokeLater(() -> frame.setVisible(true));
     }

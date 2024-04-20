@@ -15,7 +15,7 @@ public class BetOdds {
 
     public boolean isValid() {
         int count = 0;
-        for (Double value : oddsMap.sequencedValues()) {
+        for (Double value : oddsMap.values()) {
             if (value > LeagueAppConstants.VALID_ODDS) count++;
         }
         return count != 0;

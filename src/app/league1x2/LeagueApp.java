@@ -13,7 +13,6 @@ import app.league1x2.gui.LeagueGUI;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 
-@SuppressWarnings("unused")
 public final class LeagueApp {
     private final LeagueCore core = new LeagueCore();
     private final LeagueGUI gui = new LeagueGUI();
@@ -55,6 +54,11 @@ public final class LeagueApp {
                     gui.getBetsTablePanel().betsTableModel.removeRow(rowIndex);
                 }
                 updateBetInputPanel();
+                int row_count = gui.getBetsTablePanel().betsTableModel.getRowCount();
+                if (row_count == 0) {
+                    gui.getBetInputPanel().betNamePanel.clearGameIds();
+                    gui.getBetInputPanel().betNamePanel.setNextBetName();
+                }
             }
         });
     }
@@ -157,6 +161,7 @@ public final class LeagueApp {
         gui.draw();
         gui.getBetInputPanel().betNamePanel.setNextBetName();
         updateBetInputPanel();
+        updateCurrentTicketTextFields();
     }
 
     public static void main(String[] args) {

@@ -1,7 +1,7 @@
 package app.league1x2.constants;
 
 public final class LeagueAppConstants {
-    public static final boolean DEBUG = true;
+    public static final boolean DEBUG = false;
 
     public static final int WIDTH = 900;
     public static final int HEIGHT = 400;

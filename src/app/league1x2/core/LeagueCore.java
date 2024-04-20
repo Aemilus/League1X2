@@ -13,6 +13,7 @@ import app.league1x2.core.tickets.BetTickets;
 import app.league1x2.gui.panels.betting.table.BetsTableModel;
 import app.league1x2.utils.CartesianProduct;
 
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -45,7 +46,7 @@ public class LeagueCore {
         BetTickets betTickets = new BetTickets();
         for (List<Bet> betList : cpBet) {
             betTicketsCount++;
-            String betTicketName = "Bilet %d".formatted(betTicketsCount);
+            String betTicketName = MessageFormat.format("Bilet {0}", betTicketsCount);
             BetTicket betTicket = new BetTicket(betTicketName);
             for (Bet bet : betList) {
                 betTicket.addBet(bet);

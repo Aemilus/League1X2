@@ -18,10 +18,12 @@ public class CartesianProduct<E> {
             return;
         }
         List<E> currentSet = sets.get(index);
+        int lastIndex;
         for (E element: currentSet) {
             current.add(element);
             getCartesianProductHelper(sets, index+1, current, result);
-            current.removeLast();
+            lastIndex = current.size() - 1;
+            current.remove(lastIndex);
         }
     }
 }

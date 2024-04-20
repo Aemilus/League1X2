@@ -42,4 +42,8 @@ public class BetNamePanel extends JPanel {
         betNameTextField.setText(msg);
     }
 
+    public void clearGameIds() {
+        gameIds.clear();
+    }
+
 }

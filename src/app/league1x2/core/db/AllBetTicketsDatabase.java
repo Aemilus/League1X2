@@ -15,8 +15,8 @@ public class AllBetTicketsDatabase extends BaseBetTicketsDatabase {
     private void findMinMaxTicket() {
         if (betTickets.isEmpty()) return;
 
-        minTicket = betTickets.getFirst();
-        maxTicket = betTickets.getFirst();
+        minTicket = betTickets.get(0);
+        maxTicket = betTickets.get(0);
 
         BetTicket currentTicket;
         for(int i=1; i<size(); i++) {
