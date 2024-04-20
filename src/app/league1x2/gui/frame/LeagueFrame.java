@@ -11,7 +11,7 @@ public class LeagueFrame extends JFrame {
     public final FramePanel framePanel = new FramePanel();
 
     public LeagueFrame() {
-        super("League 1x2");
+        super("League 1X2");
         initFrame();
         initFramePanel();
         pack();
