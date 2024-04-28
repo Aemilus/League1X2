@@ -13,7 +13,7 @@ public class BetsTableModel extends AbstractTableModel {
             LeagueAppConstants.SELECTION_X,
             LeagueAppConstants.SELECTION_2,
     };
-    public final ArrayList<BetOdds> data = new ArrayList<>();
+    public ArrayList<BetOdds> data = new ArrayList<>();
 
     @Override
     public int getRowCount() {

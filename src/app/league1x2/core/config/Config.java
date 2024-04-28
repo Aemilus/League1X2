@@ -4,10 +4,11 @@ import app.league1x2.constants.LeagueAppConstants;
 import app.league1x2.core.betting.BetOdds;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
+import com.google.gson.stream.JsonReader;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
+import java.lang.reflect.Type;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 
@@ -28,6 +29,18 @@ public class Config {
 
     public static ArrayList<BetOdds> importConfig(File f) {
         ArrayList<BetOdds> betOdds = new ArrayList<>();
+
+        Gson gson = new Gson();
+        Type listOfBetOddsType = new TypeToken<ArrayList<BetOdds>>(){}.getType();
+
+        try (FileReader fr = new FileReader(f)) {
+            JsonReader reader = new JsonReader(fr);
+            betOdds = gson.fromJson(reader, listOfBetOddsType);
+        } catch (Exception e) {
+            // includes FileNotFoundException and IOException
+            System.out.println(e.getMessage());
+        }
+
         return betOdds;
     }
 

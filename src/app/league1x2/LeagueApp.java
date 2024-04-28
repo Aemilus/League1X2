@@ -12,13 +12,9 @@ import app.league1x2.core.LeagueCore;
 import app.league1x2.gui.LeagueGUI;
 import app.league1x2.gui.panels.betting.table.BetsTableModel;
 import app.league1x2.gui.style.Style;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 
 import javax.swing.*;
 import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 
@@ -185,7 +181,12 @@ public final class LeagueApp {
             if (selection == JFileChooser.APPROVE_OPTION) {
                 System.out.println("Importing...");
                 File f = gui.getConfigFileChooser().getSelectedFile();
-                System.out.println(f.toString());
+                ArrayList<BetOdds> betOddsList = Config.importConfig(f);
+                if (LeagueAppConstants.DEBUG) {
+                    betOddsList.forEach(bo -> System.out.println(bo.name));
+                }
+                gui.getBetsTablePanel().betsTableModel.data = betOddsList;
+                updateBetInputPanel();
             }
         });
     }
