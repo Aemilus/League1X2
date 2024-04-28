@@ -2,6 +2,9 @@
 package app.league1x2.gui;
 
 import app.league1x2.gui.frame.LeagueFrame;
+import app.league1x2.gui.menu.ConfigFileChooser;
+import app.league1x2.gui.menu.ExportMenuItem;
+import app.league1x2.gui.menu.ImportMenuItem;
 import app.league1x2.gui.panels.betting.control.BetsControlPanel;
 import app.league1x2.gui.panels.betting.input.BetInputPanel;
 import app.league1x2.gui.panels.betting.table.BetsTablePanel;
@@ -15,28 +18,26 @@ import app.league1x2.gui.panels.tickets.table.TicketTablePanel;
 import javax.swing.*;
 
 public class LeagueGUI {
-    private final LeagueFrame frame = new LeagueFrame();
-
-    private void setLookAndFeel() {
-        try {
-            UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel");
-        } catch (Exception exception) {
-            printLookAndFeel();
-        }
-    }
-
-    private void printLookAndFeel() {
-        UIManager.LookAndFeelInfo[] lafInfo = UIManager.getInstalledLookAndFeels();
-        for (UIManager.LookAndFeelInfo laf : lafInfo) {
-            System.out.println(laf);
-        }
-    }
+    public final LeagueFrame frame = new LeagueFrame();
 
     public void draw() {
         frame.setLocationRelativeTo(null);
-        setLookAndFeel();
         SwingUtilities.invokeLater(() -> frame.setVisible(true));
     }
+
+    // region menu getters
+    public ExportMenuItem getExportMenuItem() {
+        return frame.menuBar.fileMenu.exportMenuItem;
+    }
+
+    public ImportMenuItem getImportMenuItem() {
+        return frame.menuBar.fileMenu.importMenuItem;
+    }
+
+    public ConfigFileChooser getConfigFileChooser() {
+        return frame.menuBar.fileMenu.configFileChooser;
+    }
+    // endregion
 
     // region panels getters
     public BetInputPanel getBetInputPanel() {

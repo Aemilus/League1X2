@@ -11,11 +11,11 @@ public class FilterSelectionsPanel extends JPanel {
 
     public FilterSelectionsPanel() {
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        add(Box.createVerticalStrut(100));
+        add(Box.createVerticalStrut(120));
         for (String selection : LeagueAppConstants.SELECTIONS) {
             FilterSelectionPanel filterSelectionPanel = new FilterSelectionPanel(selection);
             add(filterSelectionPanel);
-            add(Box.createVerticalStrut(10));
+            add(Box.createVerticalStrut(20));
             filterSelectionPanelsList.add(filterSelectionPanel);
         }
         add(Box.createVerticalStrut(100));

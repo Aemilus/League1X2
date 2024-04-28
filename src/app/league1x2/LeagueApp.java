@@ -3,13 +3,22 @@ package app.league1x2;
 
 import app.league1x2.constants.LeagueAppConstants;
 import app.league1x2.core.betting.BetOdds;
+import app.league1x2.core.config.Config;
 import app.league1x2.core.filter.FilterTotalOddsRange;
 import app.league1x2.core.filter.SelectionRange;
 import app.league1x2.core.tickets.BetTicket;
 import app.league1x2.core.tickets.BetTickets;
 import app.league1x2.core.LeagueCore;
 import app.league1x2.gui.LeagueGUI;
+import app.league1x2.gui.panels.betting.table.BetsTableModel;
+import app.league1x2.gui.style.Style;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
+import javax.swing.*;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 
@@ -25,6 +34,8 @@ public final class LeagueApp {
         configBackwardButton();
         configApplyFilterTicketsButton();
         configResetFilterTicketsButton();
+        configExportMenuItem();
+        configImportMenuItem();
     }
 
     private void updateBetInputPanel() {
@@ -157,6 +168,28 @@ public final class LeagueApp {
                 maxTicketTotalOddsTextField.setText(maxText);
     }
 
+    private void configExportMenuItem() {
+        gui.getExportMenuItem().addActionListener(event -> {
+            int selection = gui.getConfigFileChooser().showSaveDialog(gui.frame);
+            if (selection == JFileChooser.APPROVE_OPTION) {
+                BetsTableModel betsTableModel = gui.getBetsTablePanel().betsTableModel;
+                File f = gui.getConfigFileChooser().getSelectedFile();
+                Config.exportConfig(betsTableModel.data, f);
+            }
+        });
+    }
+
+    private void configImportMenuItem() {
+        gui.getImportMenuItem().addActionListener(event -> {
+            int selection = gui.getConfigFileChooser().showOpenDialog(gui.frame);
+            if (selection == JFileChooser.APPROVE_OPTION) {
+                System.out.println("Importing...");
+                File f = gui.getConfigFileChooser().getSelectedFile();
+                System.out.println(f.toString());
+            }
+        });
+    }
+
     private void start() {
         gui.draw();
         gui.getBetInputPanel().betNamePanel.setNextBetName();
@@ -165,6 +198,7 @@ public final class LeagueApp {
     }
 
     public static void main(String[] args) {
+        Style.applyStyle();
         LeagueApp app = new LeagueApp();
         app.start();
     }

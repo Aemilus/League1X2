@@ -1,5 +1,7 @@
 package app.league1x2.gui.panels.tickets.table;
 
+import app.league1x2.constants.LeagueAppConstants;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -12,5 +14,6 @@ public class TicketTablePanel extends JPanel {
     public TicketTablePanel() {
         setLayout(new BorderLayout(5, 5));
         add(ticketTableScrollPane, BorderLayout.CENTER);
+        betsTable.setRowHeight(LeagueAppConstants.TABLE_ROW_HEIGHT);
     }
 }

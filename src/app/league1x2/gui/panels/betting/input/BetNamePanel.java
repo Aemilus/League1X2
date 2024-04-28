@@ -1,7 +1,5 @@
 package app.league1x2.gui.panels.betting.input;
 
-import app.league1x2.constants.LeagueAppConstants;
-
 import javax.swing.*;
 import java.awt.*;
 import java.text.MessageFormat;
@@ -40,7 +38,7 @@ public class BetNamePanel extends JPanel {
 
     public void setNextBetName() {
         int count = getNextBetName();
-        String msg = MessageFormat.format("{0} {1}", LeagueAppConstants.GAME, count);
+        String msg = MessageFormat.format("{0}. ", count);
         betNameTextField.setText(msg);
     }
 

@@ -1,5 +1,7 @@
 package app.league1x2.gui.panels.betting.table;
 
+import app.league1x2.constants.LeagueAppConstants;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -12,5 +14,6 @@ public class BetsTablePanel extends JPanel {
     public BetsTablePanel() {
         setLayout(new BorderLayout(5, 5));
         add(betsTableScrollPane, BorderLayout.CENTER);
+        betsTable.setRowHeight(LeagueAppConstants.TABLE_ROW_HEIGHT);
     }
 }
