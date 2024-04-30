@@ -47,9 +47,20 @@ public class BetsTableModel extends AbstractTableModel {
         if (columnIndex == 0) {
             betOdds.name = (String) aValue;
         } else {
-            Double value = Double.parseDouble((String) aValue);
+            Double value;
+            try {
+                value = Double.parseDouble(((String) aValue).trim().replace(",", "."));
+            } catch (NumberFormatException e) {
+                value = Double.parseDouble("0.0");
+            }
+
             betOdds.oddsMap.put(LeagueAppConstants.SELECTIONS[columnIndex - 1], value);
         }
+    }
+
+    @Override
+    public boolean isCellEditable(int rowIndex, int columnIndex) {
+        return true;
     }
 
     public void addRow(BetOdds betOdds) {
