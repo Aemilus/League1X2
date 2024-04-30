@@ -38,7 +38,7 @@ public final class LeagueApp {
         gui.getBetsTablePanel().betsTableModel.fireTableDataChanged();
         int row_count = gui.getBetsTablePanel().betsTableModel.getRowCount();
         gui.getBetsControlPanel().gamesCountTextField.setText(String.valueOf(row_count));
-        gui.getBetInputPanel().betOddsPanel.clear();
+        gui.getBetInputPanel().clear();
     }
 
     private void configAddBetButton() {

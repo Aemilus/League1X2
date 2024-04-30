@@ -2,7 +2,6 @@ package app.league1x2.gui.panels.betting.input;
 
 import javax.swing.*;
 import java.awt.*;
-import java.text.MessageFormat;
 
 public class BetNamePanel extends JPanel {
     private final JTextField betNameTextField = new JTextField(null, 15);
@@ -20,6 +19,10 @@ public class BetNamePanel extends JPanel {
 
     public String getBetName() {
         return betNameTextField.getText().trim();
+    }
+
+    public void clear() {
+        betNameTextField.setText(null);
     }
 
 }

@@ -24,4 +24,9 @@ public class BetInputPanel extends JPanel {
         return new BetOdds(betName, betOddsMap);
     }
 
+    public void clear() {
+        betNamePanel.clear();
+        betOddsPanel.clear();
+    }
+
 }
