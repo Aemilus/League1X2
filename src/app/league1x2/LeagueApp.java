@@ -45,8 +45,8 @@ public final class LeagueApp {
         gui.getBetInputPanel().betAddPanel.addBetButton.addActionListener(event -> {
             BetOdds betOdds = gui.getBetInputPanel().getBetOdds();
             if (betOdds.isValid()) {
+                betOdds.setGameId(gui.getBetsTablePanel().betsTableModel.getRowCount() + 1);
                 gui.getBetsTablePanel().betsTableModel.addRow(betOdds);
-                gui.getBetInputPanel().betNamePanel.setNextBetName();
                 updateBetInputPanel();
             }
         });
@@ -56,16 +56,14 @@ public final class LeagueApp {
         gui.getBetsControlPanel().deleteBetOddsButton.addActionListener(event -> {
             int[] rowsIndex = gui.getBetsTablePanel().betsTable.getSelectedRows();
             if (rowsIndex.length > 0) {
+                // remove rows
                 for (int i = rowsIndex.length - 1; i >= 0; i--) {
                     int rowIndex = rowsIndex[i];
                     gui.getBetsTablePanel().betsTableModel.removeRow(rowIndex);
                 }
+                // renumber the game ids
+                gui.getBetsTablePanel().betsTableModel.renumberGameIds();
                 updateBetInputPanel();
-                int row_count = gui.getBetsTablePanel().betsTableModel.getRowCount();
-                if (row_count == 0) {
-                    gui.getBetInputPanel().betNamePanel.clearGameIds();
-                    gui.getBetInputPanel().betNamePanel.setNextBetName();
-                }
             }
         });
     }
@@ -193,7 +191,6 @@ public final class LeagueApp {
 
     private void start() {
         gui.draw();
-        gui.getBetInputPanel().betNamePanel.setNextBetName();
         updateBetInputPanel();
         updateCurrentTicketTextFields();
     }

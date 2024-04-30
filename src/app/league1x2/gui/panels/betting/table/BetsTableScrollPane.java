@@ -9,8 +9,8 @@ public class BetsTableScrollPane extends JScrollPane {
     public BetsTableScrollPane(JTable betsTable) {
         super(betsTable);
         betsTable.setFillsViewportHeight(true);
-        betsTable.getColumnModel().getColumn(0).
-                setMinWidth(LeagueAppConstants.FIRST_COLUMN_WIDTH);
+        betsTable.getColumnModel().getColumn(LeagueAppConstants.GAME_COLUMN_INDEX).
+                setMinWidth(LeagueAppConstants.GAME_COLUMN_WIDTH);
     }
 
 }

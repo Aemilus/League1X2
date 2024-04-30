@@ -2,9 +2,11 @@ package app.league1x2.core.betting;
 
 import app.league1x2.constants.LeagueAppConstants;
 
+import java.text.MessageFormat;
 import java.util.LinkedHashMap;
 
 public class BetOdds {
+    public String gameId;
     public String name;
     public final LinkedHashMap<String, Double> oddsMap;
 
@@ -19,6 +21,10 @@ public class BetOdds {
             if (value > LeagueAppConstants.VALID_ODDS) count++;
         }
         return count != 0;
+    }
+
+    public void setGameId(int gameId) {
+        this.gameId = MessageFormat.format("{0}.", gameId);
     }
 
 }

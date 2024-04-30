@@ -10,13 +10,16 @@ public final class LeagueAppConstants {
 
     public static final int WIDTH = 1400;
     public static final int HEIGHT = 600;
-    public static final int FIRST_COLUMN_WIDTH = WIDTH / 5;
+
+    public static final int GAME_COLUMN_INDEX = 1;
+    public static final int GAME_COLUMN_WIDTH = WIDTH / 5;
 
     public static final int TABLE_ROW_HEIGHT = 30;
 
     public static final Double VALID_ODDS = Double.parseDouble("1.00");
 
-    public final static String GAME = "Meci";
+    public final static String GAME_ID = "Nr.";
+    public final static String GAME_NAME = "Meci";
     public final static String TICKET = "Bilet";
     public final static String SELECTION = "Selectie";
     public final static String ODDS = "Cota";

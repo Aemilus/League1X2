@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 public class TicketTableModel extends AbstractTableModel {
     private final String[] columnNames = {
-            LeagueAppConstants.GAME,
+            LeagueAppConstants.GAME_NAME,
             LeagueAppConstants.SELECTION,
             LeagueAppConstants.ODDS,
     };

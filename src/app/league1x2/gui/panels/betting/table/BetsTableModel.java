@@ -8,7 +8,8 @@ import java.util.ArrayList;
 
 public class BetsTableModel extends AbstractTableModel {
     private final String[] columnNames = {
-            LeagueAppConstants.GAME,
+            LeagueAppConstants.GAME_ID,
+            LeagueAppConstants.GAME_NAME,
             LeagueAppConstants.SELECTION_1,
             LeagueAppConstants.SELECTION_X,
             LeagueAppConstants.SELECTION_2,
@@ -33,28 +34,42 @@ public class BetsTableModel extends AbstractTableModel {
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
         BetOdds betOdds = data.get(rowIndex);
-        if (columnIndex == 0) {
-            return betOdds.name;
-        }
-        else {
-            return betOdds.oddsMap.get(getColumnName(columnIndex));
+        switch (columnIndex) {
+            case 0:
+                return betOdds.gameId;
+            case 1:
+                return betOdds.name;
+            default:
+                return betOdds.oddsMap.get(getColumnName(columnIndex));
         }
     }
 
     @Override
     public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
         BetOdds betOdds = data.get(rowIndex);
+
+        String value = ((String) aValue).trim().replace(",", ".");
         if (columnIndex == 0) {
-            betOdds.name = (String) aValue;
-        } else {
-            Double value;
             try {
-                value = Double.parseDouble(((String) aValue).trim().replace(",", "."));
+                if (value.endsWith(".") || value.endsWith(",")) {
+                    value = value.substring(0, value.length() - 1);
+                }
+                betOdds.setGameId(Integer.parseInt(value));
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+        } else if (columnIndex == 1) {
+            betOdds.name = value;
+        }
+        else {
+            double d;
+            try {
+                d = Double.parseDouble(value);
             } catch (NumberFormatException e) {
-                value = Double.parseDouble("0.0");
+                d = Double.parseDouble("0.0");
             }
 
-            betOdds.oddsMap.put(LeagueAppConstants.SELECTIONS[columnIndex - 1], value);
+            betOdds.oddsMap.put(LeagueAppConstants.SELECTIONS[columnIndex - 1], d);
         }
     }
 
@@ -70,6 +85,12 @@ public class BetsTableModel extends AbstractTableModel {
     @SuppressWarnings("UnusedReturnValue")
     public BetOdds removeRow(int rowIndex) {
         return data.remove(rowIndex);
+    }
+
+    public void renumberGameIds() {
+        for (int rowIndex = 0; rowIndex < getRowCount(); rowIndex++) {
+            data.get(rowIndex).setGameId(rowIndex + 1);
+        }
     }
 
 }
