@@ -12,18 +12,19 @@ import java.lang.reflect.Type;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 
+@SuppressWarnings("CallToPrintStackTrace")
 public class Config {
 
     public static void exportConfig(ArrayList<BetOdds> betOdds, File f) {
         String path = f.getAbsolutePath();
-        if (!path.endsWith(LeagueAppConstants.FILE_EXTENSION)) {
-            path = MessageFormat.format("{0}{1}", path, LeagueAppConstants.FILE_EXTENSION);
+        if (!path.endsWith(LeagueAppConstants.BET_EXTENSION)) {
+            path = MessageFormat.format("{0}{1}", path, LeagueAppConstants.BET_EXTENSION);
         }
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         try (FileWriter fw = new FileWriter(path)) {
             gson.toJson(betOdds, fw);
         } catch (IOException e) {
-            System.out.println(e.getMessage());
+            e.printStackTrace();
         }
     }
 
@@ -38,7 +39,7 @@ public class Config {
             betOdds = gson.fromJson(reader, listOfBetOddsType);
         } catch (Exception e) {
             // includes FileNotFoundException and IOException
-            System.out.println(e.getMessage());
+            e.printStackTrace();
         }
 
         return betOdds;

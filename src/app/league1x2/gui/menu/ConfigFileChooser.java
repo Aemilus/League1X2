@@ -7,7 +7,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import java.text.MessageFormat;
 
 public class ConfigFileChooser extends JFileChooser {
-    String description = MessageFormat.format("*.{0}", LeagueAppConstants.FILE_EXTENSION);
+    String description = MessageFormat.format("*{0}", LeagueAppConstants.BET_EXTENSION);
     FileNameExtensionFilter filter  = new FileNameExtensionFilter
             (description, LeagueAppConstants.FILE_EXTENSION);
 

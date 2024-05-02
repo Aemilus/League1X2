@@ -4,6 +4,6 @@ import javax.swing.*;
 
 public class ExportMenuItem extends JMenuItem {
     public ExportMenuItem() {
-        super("Export...");
+        super("Salveaza...");
     }
 }

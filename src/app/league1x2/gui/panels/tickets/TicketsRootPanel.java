@@ -1,5 +1,6 @@
 package app.league1x2.gui.panels.tickets;
 
+import app.league1x2.constants.LeagueAppConstants;
 import app.league1x2.gui.panels.tickets.navigate.TicketsNavigationPanel;
 import app.league1x2.gui.panels.tickets.stats.TicketsStatsPanel;
 import app.league1x2.gui.panels.tickets.table.TicketTablePanel;

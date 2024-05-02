@@ -11,5 +11,13 @@ public class TicketTableScrollPane extends JScrollPane {
         ticketsTable.setFillsViewportHeight(true);
         ticketsTable.getColumnModel().getColumn(0).
                 setMinWidth(LeagueAppConstants.GAME_COLUMN_WIDTH);
+        ticketsTable.getColumnModel().getColumn(1).
+                setMinWidth(LeagueAppConstants.ODD_COLUMN_WIDTH + 20);
+        ticketsTable.getColumnModel().getColumn(1).
+                setMaxWidth(LeagueAppConstants.ODD_COLUMN_WIDTH + 20);
+        ticketsTable.getColumnModel().getColumn(2).
+                setMinWidth(LeagueAppConstants.ODD_COLUMN_WIDTH);
+        ticketsTable.getColumnModel().getColumn(2).
+                setMaxWidth(LeagueAppConstants.ODD_COLUMN_WIDTH);
     }
 }

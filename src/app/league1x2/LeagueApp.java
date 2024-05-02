@@ -166,6 +166,7 @@ public final class LeagueApp {
         gui.getExportMenuItem().addActionListener(event -> {
             int selection = gui.getConfigFileChooser().showSaveDialog(gui.frame);
             if (selection == JFileChooser.APPROVE_OPTION) {
+                if (LeagueAppConstants.DEBUG) {System.out.println("Exporting...");}
                 BetsTableModel betsTableModel = gui.getBetsTablePanel().betsTableModel;
                 File f = gui.getConfigFileChooser().getSelectedFile();
                 Config.exportConfig(betsTableModel.data, f);
@@ -177,7 +178,7 @@ public final class LeagueApp {
         gui.getImportMenuItem().addActionListener(event -> {
             int selection = gui.getConfigFileChooser().showOpenDialog(gui.frame);
             if (selection == JFileChooser.APPROVE_OPTION) {
-                System.out.println("Importing...");
+                if (LeagueAppConstants.DEBUG) {System.out.println("Importing...");}
                 File f = gui.getConfigFileChooser().getSelectedFile();
                 ArrayList<BetOdds> betOddsList = Config.importConfig(f);
                 if (LeagueAppConstants.DEBUG) {

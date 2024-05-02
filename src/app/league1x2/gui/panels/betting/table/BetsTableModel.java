@@ -50,14 +50,7 @@ public class BetsTableModel extends AbstractTableModel {
 
         String value = ((String) aValue).trim().replace(",", ".");
         if (columnIndex == 0) {
-            try {
-                if (value.endsWith(".") || value.endsWith(",")) {
-                    value = value.substring(0, value.length() - 1);
-                }
-                betOdds.setGameId(Integer.parseInt(value));
-            } catch (Exception e) {
-                System.out.println(e.getMessage());
-            }
+            return;
         } else if (columnIndex == 1) {
             betOdds.name = value;
         }
@@ -69,13 +62,13 @@ public class BetsTableModel extends AbstractTableModel {
                 d = Double.parseDouble("0.0");
             }
 
-            betOdds.oddsMap.put(LeagueAppConstants.SELECTIONS[columnIndex - 1], d);
+            betOdds.oddsMap.put(LeagueAppConstants.SELECTIONS[columnIndex - 2], d);
         }
     }
 
     @Override
     public boolean isCellEditable(int rowIndex, int columnIndex) {
-        return true;
+        return columnIndex != 0;
     }
 
     public void addRow(BetOdds betOdds) {
@@ -85,6 +78,13 @@ public class BetsTableModel extends AbstractTableModel {
     @SuppressWarnings("UnusedReturnValue")
     public BetOdds removeRow(int rowIndex) {
         return data.remove(rowIndex);
+    }
+
+    public void switchRows(int rowIndex1, int rowIndex2) {
+        BetOdds bo1 = data.get(rowIndex1);
+        BetOdds bo2 = data.get(rowIndex2);
+        data.set(rowIndex1, bo2);
+        data.set(rowIndex2, bo1);
     }
 
     public void renumberGameIds() {

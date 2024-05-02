@@ -13,7 +13,6 @@ public class FiltersRootPanel extends JPanel {
     public FiltersRootPanel() {
         initResetFiltersButton();
         initApplyFiltersButton();
-
         setPreferredSize(new Dimension(LeagueAppConstants.WIDTH / 4, 0));
         setLayout(new BorderLayout(5, 5));
         add(resetFiltersButton, BorderLayout.NORTH);

@@ -4,6 +4,6 @@ import javax.swing.*;
 
 public class ImportMenuItem extends JMenuItem {
     public ImportMenuItem() {
-        super("Import...");
+        super("Incarca...");
     }
 }
