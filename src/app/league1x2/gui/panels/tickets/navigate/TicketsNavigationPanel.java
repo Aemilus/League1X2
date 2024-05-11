@@ -1,12 +1,14 @@
 package app.league1x2.gui.panels.tickets.navigate;
 
+import app.league1x2.constants.LeagueAppConstants;
+
 import javax.swing.*;
 import java.awt.*;
 
 public class TicketsNavigationPanel extends JPanel {
-    public JButton backwardButton = new JButton("\u25C4");
+    public JButton backwardButton = new JButton(LeagueAppConstants.LEFT_ARROW);
     public JTextField currentTicketTextField = new JTextField(null, 15);
-    public JButton forwardButton = new JButton("\u25BA");
+    public JButton forwardButton = new JButton(LeagueAppConstants.RIGHT_ARROW);
 
     public TicketsNavigationPanel() {
         initBackwardButton();
