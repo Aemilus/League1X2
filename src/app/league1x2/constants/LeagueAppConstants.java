@@ -2,6 +2,7 @@ package app.league1x2.constants;
 
 import java.text.MessageFormat;
 
+@SuppressWarnings("UnnecessaryUnicodeEscape")
 public final class LeagueAppConstants {
     public static final boolean DEBUG = true;
 
