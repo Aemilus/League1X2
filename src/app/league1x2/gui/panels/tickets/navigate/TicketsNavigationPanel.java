@@ -4,9 +4,9 @@ import javax.swing.*;
 import java.awt.*;
 
 public class TicketsNavigationPanel extends JPanel {
-    public JButton backwardButton = new JButton("<<");
+    public JButton backwardButton = new JButton("\u25C4");
     public JTextField currentTicketTextField = new JTextField(null, 15);
-    public JButton forwardButton = new JButton(">>");
+    public JButton forwardButton = new JButton("\u25BA");
 
     public TicketsNavigationPanel() {
         initBackwardButton();

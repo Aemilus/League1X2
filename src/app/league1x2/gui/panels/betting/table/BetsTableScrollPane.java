@@ -11,13 +11,11 @@ public class BetsTableScrollPane extends JScrollPane {
         super(betsTable);
         betsTable.setFillsViewportHeight(true);
 
+        // after for loop execution the width of the game name column will fit the remaining space
         for (int fixedColumn : fixedColumns) {
             betsTable.getColumnModel().getColumn(fixedColumn).setMinWidth(LeagueAppConstants.ODD_COLUMN_WIDTH);
             betsTable.getColumnModel().getColumn(fixedColumn).setMaxWidth(LeagueAppConstants.ODD_COLUMN_WIDTH);
         }
-
-        betsTable.getColumnModel().getColumn(LeagueAppConstants.GAME_COLUMN_INDEX).
-                setMinWidth(LeagueAppConstants.GAME_COLUMN_WIDTH);
     }
 
 }

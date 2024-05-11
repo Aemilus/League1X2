@@ -9,6 +9,7 @@ import java.util.ArrayList;
 
 public class TicketTableModel extends AbstractTableModel {
     private final String[] columnNames = {
+            LeagueAppConstants.GAME_ID,
             LeagueAppConstants.GAME_NAME,
             LeagueAppConstants.SELECTION,
             LeagueAppConstants.ODDS,
@@ -29,8 +30,10 @@ public class TicketTableModel extends AbstractTableModel {
     public Object getValueAt(int rowIndex, int columnIndex) {
         Bet bet = data.get(rowIndex);
         if (columnIndex == 0) {
-            return bet.getName();
+            return bet.getId();
         } else if (columnIndex == 1) {
+            return bet.getName();
+        } else if (columnIndex == 2) {
             return bet.getSelection();
         } else {
             return bet.getOdd();

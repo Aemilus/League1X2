@@ -33,6 +33,11 @@ public final class LeagueAppConstants {
     public final static String SELECTION_2 = "2";
     public final static String[] SELECTIONS = {SELECTION_1, SELECTION_X, SELECTION_2};
 
+    public final static String UP_ARROW = "\u25B2";
+    public final static String DOWN_ARROW = "\u25BC";
+    public final static String LEFT_ARROW = "\u25B2";
+    public final static String RIGHT_ARROW = "\u25B2";
+
     private LeagueAppConstants() {
         // prevent creating a class instance
     }

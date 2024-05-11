@@ -29,7 +29,7 @@ public class LeagueCore {
             ArrayList<Bet> gameBets = new ArrayList<>();
             for (Map.Entry<String, Double> betOdd : betOdds.oddsMap.entrySet()) {
                 if (Double.compare(betOdd.getValue(), LeagueAppConstants.VALID_ODDS) > 0) {
-                    Bet bet = new Bet(betOdds.name, betOdd.getKey(), betOdd.getValue());
+                    Bet bet = new Bet(betOdds.gameId, betOdds.name, betOdd.getKey(), betOdd.getValue());
                     gameBets.add(bet);
                 }
             }
