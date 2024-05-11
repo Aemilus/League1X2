@@ -3,7 +3,7 @@ package app.league1x2.constants;
 import java.text.MessageFormat;
 
 public final class LeagueAppConstants {
-    public static final boolean DEBUG = false;
+    public static final boolean DEBUG = true;
 
     public static final String FILE_EXTENSION = "bet";
     public static final String BET_EXTENSION = MessageFormat.format(".{0}", FILE_EXTENSION);
@@ -13,9 +13,6 @@ public final class LeagueAppConstants {
 
     public static final int WIDTH = 1500;
     public static final int HEIGHT = 600;
-
-    public static final int GAME_COLUMN_INDEX = 1;
-    public static final int GAME_COLUMN_WIDTH = WIDTH / 6;
 
     public static final int ODD_COLUMN_WIDTH = 60;
 

@@ -24,4 +24,10 @@ public interface BetTicketsDatabase {
     void forwardCursor();
 
     void backwardCursor();
+
+    BetTicket getMinTicket();
+
+    BetTicket getMaxTicket();
+
+    void findMinMaxTicket();
 }

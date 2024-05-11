@@ -7,7 +7,6 @@ import java.awt.*;
 
 @SuppressWarnings("FieldCanBeLocal")
 public class BetsTablePanel extends JPanel {
-    public final MoveBetPanel moveBetPanel = new MoveBetPanel();
     public final BetsTableModel betsTableModel = new BetsTableModel();
     public final JTable betsTable = new JTable(betsTableModel);
     private final BetsTableScrollPane betsTableScrollPane = new BetsTableScrollPane(betsTable);
@@ -15,7 +14,6 @@ public class BetsTablePanel extends JPanel {
     public BetsTablePanel() {
         setLayout(new BorderLayout(5, 5));
         add(betsTableScrollPane, BorderLayout.CENTER);
-//        add(moveBetPanel, BorderLayout.WEST);
         betsTable.setRowHeight(LeagueAppConstants.TABLE_ROW_HEIGHT);
     }
 }

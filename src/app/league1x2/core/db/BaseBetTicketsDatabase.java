@@ -1,11 +1,16 @@
 package app.league1x2.core.db;
 
+import app.league1x2.constants.LeagueAppConstants;
 import app.league1x2.core.tickets.BetTicket;
 import app.league1x2.core.tickets.BetTickets;
+
+import java.text.MessageFormat;
 
 public class BaseBetTicketsDatabase implements BetTicketsDatabase {
     public BetTickets betTickets = new BetTickets();
     private int cursor;
+    public BetTicket minTicket;
+    public BetTicket maxTicket;
 
     @Override
     public void clear() {
@@ -17,6 +22,16 @@ public class BaseBetTicketsDatabase implements BetTicketsDatabase {
     public void setBetTickets(BetTickets betTickets) {
         this.betTickets = betTickets;
         cursor = 0;
+    }
+
+    @Override
+    public BetTicket getMinTicket() {
+        return minTicket;
+    }
+
+    @Override
+    public BetTicket getMaxTicket() {
+        return maxTicket;
     }
 
     @Override
@@ -69,4 +84,26 @@ public class BaseBetTicketsDatabase implements BetTicketsDatabase {
             cursor--;
         }
     }
+
+    public void findMinMaxTicket() {
+        if (betTickets.isEmpty()) return;
+
+        minTicket = betTickets.get(0);
+        maxTicket = betTickets.get(0);
+
+        BetTicket currentTicket;
+        for(int i=1; i<size(); i++) {
+            currentTicket = betTickets.get(i);
+            if (currentTicket.getOddsTotal() < minTicket.getOddsTotal()) minTicket = currentTicket;
+            if (currentTicket.getOddsTotal() > maxTicket.getOddsTotal()) maxTicket = currentTicket;
+        }
+
+        if (LeagueAppConstants.DEBUG) {
+            String min = MessageFormat.format("minTicket: {0}", minTicket);
+            String max = MessageFormat.format("maxTicket: {0}", maxTicket);
+            System.out.println(min);
+            System.out.println(max);
+        }
+    }
+
 }

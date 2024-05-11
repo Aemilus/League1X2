@@ -86,6 +86,7 @@ public final class LeagueApp {
             gui.getTicketTablePanel().ticketTableModel.setData(core.activeBetTicketsDatabase.get());
             gui.getTicketTablePanel().ticketTableModel.fireTableDataChanged();
             updateCurrentTicketTextFields();
+            core.activeBetTicketsDatabase.findMinMaxTicket();
             updateTicketsStatsPanel();
         }
     }
@@ -121,6 +122,7 @@ public final class LeagueApp {
             gui.getTicketTablePanel().ticketTableModel.setData(core.activeBetTicketsDatabase.get());
             gui.getTicketTablePanel().ticketTableModel.fireTableDataChanged();
             updateCurrentTicketTextFields();
+            refreshDisplayTicketsPanel();
         });
     }
 

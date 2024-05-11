@@ -58,12 +58,12 @@ public class LeagueCore {
     }
 
     public ArrayList<BetTicket> getTicketsRange() {
-        if (allBetTicketsDatabase.size() == 0) {
+        if (activeBetTicketsDatabase.size() == 0) {
             return null;
         }
         ArrayList<BetTicket> range = new ArrayList<>();
-        range.add(allBetTicketsDatabase.minTicket);
-        range.add(allBetTicketsDatabase.maxTicket);
+        range.add(activeBetTicketsDatabase.getMinTicket());
+        range.add(activeBetTicketsDatabase.getMaxTicket());
         return range;
     }
 
