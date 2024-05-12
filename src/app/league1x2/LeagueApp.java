@@ -14,6 +14,8 @@ import app.league1x2.gui.panels.betting.table.BetsTableModel;
 import app.league1x2.gui.style.Style;
 
 import javax.swing.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.io.File;
 import java.text.MessageFormat;
 import java.util.ArrayList;
@@ -32,6 +34,10 @@ public final class LeagueApp {
         configResetFilterTicketsButton();
         configExportMenuItem();
         configImportMenuItem();
+        configUpButton();
+        configDownButton();
+        configGoToMinTicket();
+        configGoToMaxTicket();
     }
 
     private void updateBetInputPanel() {
@@ -87,6 +93,8 @@ public final class LeagueApp {
             gui.getTicketTablePanel().ticketTableModel.fireTableDataChanged();
             updateCurrentTicketTextFields();
             core.activeBetTicketsDatabase.findMinMaxTicket();
+            updateTicketsStatsPanel();
+        } else {
             updateTicketsStatsPanel();
         }
     }
@@ -186,6 +194,68 @@ public final class LeagueApp {
                 }
                 gui.getBetsTablePanel().betsTableModel.data = betOddsList;
                 updateBetInputPanel();
+            }
+        });
+    }
+
+    private void configUpButton() {
+        gui.getBetsControlPanel().upButton.addActionListener(event -> {
+            int[] rowsIndex = gui.getBetsTablePanel().betsTable.getSelectedRows();
+            if (rowsIndex.length == 1) {
+                int rowIndex1 = rowsIndex[0];
+                int rowIndex2 = rowIndex1 - 1;
+                if (rowIndex1 > 0) {
+                    gui.getBetsTablePanel().betsTableModel.switchRows(rowIndex1, rowIndex2);
+                    gui.getBetsTablePanel().betsTableModel.renumberGameIds();
+                    updateBetInputPanel();
+                    gui.getBetsTablePanel().betsTable.setRowSelectionInterval(rowIndex2, rowIndex2);
+                }
+            }
+        });
+    }
+
+    private void configDownButton() {
+        gui.getBetsControlPanel().downButton.addActionListener(event -> {
+            int[] rowsIndex = gui.getBetsTablePanel().betsTable.getSelectedRows();
+            if (rowsIndex.length == 1) {
+                int rowIndex1 = rowsIndex[0];
+                int rowIndex2 = rowIndex1 + 1;
+                if (rowIndex2 < gui.getBetsTablePanel().betsTableModel.getRowCount()) {
+                    gui.getBetsTablePanel().betsTableModel.switchRows(rowIndex1, rowIndex2);
+                    gui.getBetsTablePanel().betsTableModel.renumberGameIds();
+                    updateBetInputPanel();
+                    gui.getBetsTablePanel().betsTable.setRowSelectionInterval(rowIndex2, rowIndex2);
+                }
+            }
+        });
+    }
+
+    private void configGoToMinTicket() {
+        gui.getTicketsStatsPanel().minTicketTotalOddsTextField.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                int cursor = core.activeBetTicketsDatabase.getMinCursor();
+                if (cursor > 0){
+                    core.activeBetTicketsDatabase.setCursor(cursor);
+                    gui.getTicketTablePanel().ticketTableModel.setData(core.activeBetTicketsDatabase.get());
+                    gui.getTicketTablePanel().ticketTableModel.fireTableDataChanged();
+                    updateCurrentTicketTextFields();
+                }
+            }
+        });
+    }
+
+    private void configGoToMaxTicket() {
+        gui.getTicketsStatsPanel().maxTicketTotalOddsTextField.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                int cursor = core.activeBetTicketsDatabase.getMaxCursor();
+                if (cursor > 0){
+                    core.activeBetTicketsDatabase.setCursor(cursor);
+                    gui.getTicketTablePanel().ticketTableModel.setData(core.activeBetTicketsDatabase.get());
+                    gui.getTicketTablePanel().ticketTableModel.fireTableDataChanged();
+                    updateCurrentTicketTextFields();
+                }
             }
         });
     }

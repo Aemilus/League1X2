@@ -30,4 +30,8 @@ public interface BetTicketsDatabase {
     BetTicket getMaxTicket();
 
     void findMinMaxTicket();
+
+    int getMinCursor();
+
+    int getMaxCursor();
 }

@@ -4,7 +4,7 @@ import java.text.MessageFormat;
 
 @SuppressWarnings("UnnecessaryUnicodeEscape")
 public final class LeagueAppConstants {
-    public static final boolean DEBUG = true;
+    public static final boolean DEBUG = false;
 
     public static final String FILE_EXTENSION = "bet";
     public static final String BET_EXTENSION = MessageFormat.format(".{0}", FILE_EXTENSION);

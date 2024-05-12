@@ -11,6 +11,8 @@ public class BaseBetTicketsDatabase implements BetTicketsDatabase {
     private int cursor;
     public BetTicket minTicket;
     public BetTicket maxTicket;
+    public int minTicketCursor;
+    public int maxTicketCursor;
 
     @Override
     public void clear() {
@@ -86,24 +88,47 @@ public class BaseBetTicketsDatabase implements BetTicketsDatabase {
     }
 
     public void findMinMaxTicket() {
-        if (betTickets.isEmpty()) return;
+        if (betTickets.isEmpty()) {
+            minTicket = null;
+            maxTicket = null;
+            minTicketCursor = -1;
+            maxTicketCursor = -1;
+            return;
+        }
 
         minTicket = betTickets.get(0);
         maxTicket = betTickets.get(0);
+        minTicketCursor = 1;
+        maxTicketCursor = 1;
 
         BetTicket currentTicket;
         for(int i=1; i<size(); i++) {
             currentTicket = betTickets.get(i);
-            if (currentTicket.getOddsTotal() < minTicket.getOddsTotal()) minTicket = currentTicket;
-            if (currentTicket.getOddsTotal() > maxTicket.getOddsTotal()) maxTicket = currentTicket;
+            if (currentTicket.getOddsTotal() < minTicket.getOddsTotal()) {
+                minTicket = currentTicket;
+                minTicketCursor = i+1;
+            }
+            if (currentTicket.getOddsTotal() > maxTicket.getOddsTotal()) {
+                maxTicket = currentTicket;
+                maxTicketCursor = i+1;
+            }
         }
 
         if (LeagueAppConstants.DEBUG) {
-            String min = MessageFormat.format("minTicket: {0}", minTicket);
-            String max = MessageFormat.format("maxTicket: {0}", maxTicket);
+            String min = MessageFormat.format("cursor: {0}\tminTicket: {1}", minTicketCursor, minTicket);
+            String max = MessageFormat.format("cursor: {0}\tmaxTicket: {1}", maxTicketCursor, maxTicket);
             System.out.println(min);
             System.out.println(max);
         }
     }
 
+    @Override
+    public int getMinCursor() {
+        return minTicketCursor;
+    }
+
+    @Override
+    public int getMaxCursor() {
+        return maxTicketCursor;
+    }
 }
