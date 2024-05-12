@@ -62,8 +62,8 @@ public class LeagueCore {
             return null;
         }
         ArrayList<BetTicket> range = new ArrayList<>();
-        range.add(activeBetTicketsDatabase.getMinTicket());
-        range.add(activeBetTicketsDatabase.getMaxTicket());
+        range.add(activeBetTicketsDatabase.getMinTicket().betTicket);
+        range.add(activeBetTicketsDatabase.getMaxTicket().betTicket);
         return range;
     }
 
@@ -77,7 +77,7 @@ public class LeagueCore {
         BetTicketsDatabase tempDatabase = new FilteredBetTicketsDatabase();
 
         if (filterTotalOddsRange.isValid()) {
-            for (BetTicket betTicket : allBetTicketsDatabase.betTickets) {
+            for (BetTicket betTicket : allBetTicketsDatabase.getBetTickets()) {
                 if (betTicket.getOddsTotal() < filterTotalOddsRange.minTotalOdds) continue;
                 if (betTicket.getOddsTotal() > filterTotalOddsRange.maxTotalOdds) continue;
                 tempDatabase.add(betTicket);
@@ -98,7 +98,7 @@ public class LeagueCore {
     }
 
     public void clearFilterTickets() {
-        filteredBetTicketsDatabase.betTickets.clear();
+        filteredBetTicketsDatabase.getBetTickets().clear();
         activeBetTicketsDatabase = allBetTicketsDatabase;
     }
 

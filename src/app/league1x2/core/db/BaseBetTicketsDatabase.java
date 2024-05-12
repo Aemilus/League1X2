@@ -2,17 +2,16 @@ package app.league1x2.core.db;
 
 import app.league1x2.constants.LeagueAppConstants;
 import app.league1x2.core.tickets.BetTicket;
+import app.league1x2.core.tickets.BetTicketPosition;
 import app.league1x2.core.tickets.BetTickets;
 
 import java.text.MessageFormat;
 
 public class BaseBetTicketsDatabase implements BetTicketsDatabase {
-    public BetTickets betTickets = new BetTickets();
+    private BetTickets betTickets = new BetTickets();
     private int cursor;
-    public BetTicket minTicket;
-    public BetTicket maxTicket;
-    public int minTicketCursor;
-    public int maxTicketCursor;
+    private final BetTicketPosition minTicket = new BetTicketPosition();
+    private final BetTicketPosition maxTicket = new BetTicketPosition();
 
     @Override
     public void clear() {
@@ -27,12 +26,12 @@ public class BaseBetTicketsDatabase implements BetTicketsDatabase {
     }
 
     @Override
-    public BetTicket getMinTicket() {
+    public BetTicketPosition getMinTicket() {
         return minTicket;
     }
 
     @Override
-    public BetTicket getMaxTicket() {
+    public BetTicketPosition getMaxTicket() {
         return maxTicket;
     }
 
@@ -87,48 +86,37 @@ public class BaseBetTicketsDatabase implements BetTicketsDatabase {
         }
     }
 
-    public void findMinMaxTicket() {
+    public void findAndSetMinMaxTicket() {
         if (betTickets.isEmpty()) {
-            minTicket = null;
-            maxTicket = null;
-            minTicketCursor = -1;
-            maxTicketCursor = -1;
+            minTicket.clear();
+            maxTicket.clear();
             return;
         }
 
-        minTicket = betTickets.get(0);
-        maxTicket = betTickets.get(0);
-        minTicketCursor = 1;
-        maxTicketCursor = 1;
+        minTicket.betTicket = betTickets.get(0);
+        maxTicket.betTicket = betTickets.get(0);
+        minTicket.cursor = 1;
+        maxTicket.cursor = 1;
 
         BetTicket currentTicket;
         for(int i=1; i<size(); i++) {
             currentTicket = betTickets.get(i);
-            if (currentTicket.getOddsTotal() < minTicket.getOddsTotal()) {
-                minTicket = currentTicket;
-                minTicketCursor = i+1;
+            if (currentTicket.getOddsTotal() < minTicket.betTicket.getOddsTotal()) {
+                minTicket.betTicket = currentTicket;
+                minTicket.cursor = i+1;
             }
-            if (currentTicket.getOddsTotal() > maxTicket.getOddsTotal()) {
-                maxTicket = currentTicket;
-                maxTicketCursor = i+1;
+            if (currentTicket.getOddsTotal() > maxTicket.betTicket.getOddsTotal()) {
+                maxTicket.betTicket= currentTicket;
+                maxTicket.cursor = i+1;
             }
         }
 
         if (LeagueAppConstants.DEBUG) {
-            String min = MessageFormat.format("cursor: {0}\tminTicket: {1}", minTicketCursor, minTicket);
-            String max = MessageFormat.format("cursor: {0}\tmaxTicket: {1}", maxTicketCursor, maxTicket);
+            String min = MessageFormat.format("cursor: {0}\tminTicket: {1}", minTicket.cursor, minTicket);
+            String max = MessageFormat.format("cursor: {0}\tmaxTicket: {1}", maxTicket.cursor, maxTicket);
             System.out.println(min);
             System.out.println(max);
         }
     }
 
-    @Override
-    public int getMinCursor() {
-        return minTicketCursor;
-    }
-
-    @Override
-    public int getMaxCursor() {
-        return maxTicketCursor;
-    }
 }

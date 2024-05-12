@@ -1,6 +1,7 @@
 package app.league1x2.core.db;
 
 import app.league1x2.core.tickets.BetTicket;
+import app.league1x2.core.tickets.BetTicketPosition;
 import app.league1x2.core.tickets.BetTickets;
 
 public interface BetTicketsDatabase {
@@ -25,13 +26,9 @@ public interface BetTicketsDatabase {
 
     void backwardCursor();
 
-    BetTicket getMinTicket();
+    BetTicketPosition getMinTicket();
 
-    BetTicket getMaxTicket();
+    BetTicketPosition getMaxTicket();
 
-    void findMinMaxTicket();
-
-    int getMinCursor();
-
-    int getMaxCursor();
+    void findAndSetMinMaxTicket();
 }

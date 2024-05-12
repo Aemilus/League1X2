@@ -92,7 +92,7 @@ public final class LeagueApp {
             gui.getTicketTablePanel().ticketTableModel.setData(core.activeBetTicketsDatabase.get());
             gui.getTicketTablePanel().ticketTableModel.fireTableDataChanged();
             updateCurrentTicketTextFields();
-            core.activeBetTicketsDatabase.findMinMaxTicket();
+            core.activeBetTicketsDatabase.findAndSetMinMaxTicket();
             updateTicketsStatsPanel();
         } else {
             updateTicketsStatsPanel();
@@ -234,7 +234,7 @@ public final class LeagueApp {
         gui.getTicketsStatsPanel().minTicketTotalOddsTextField.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                int cursor = core.activeBetTicketsDatabase.getMinCursor();
+                int cursor = core.activeBetTicketsDatabase.getMinTicket().cursor;
                 if (cursor > 0){
                     core.activeBetTicketsDatabase.setCursor(cursor);
                     gui.getTicketTablePanel().ticketTableModel.setData(core.activeBetTicketsDatabase.get());
@@ -249,7 +249,7 @@ public final class LeagueApp {
         gui.getTicketsStatsPanel().maxTicketTotalOddsTextField.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                int cursor = core.activeBetTicketsDatabase.getMaxCursor();
+                int cursor = core.activeBetTicketsDatabase.getMaxTicket().cursor;
                 if (cursor > 0){
                     core.activeBetTicketsDatabase.setCursor(cursor);
                     gui.getTicketTablePanel().ticketTableModel.setData(core.activeBetTicketsDatabase.get());
